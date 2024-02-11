@@ -1,0 +1,1 @@
+Really basic game with the only premise being only a single variable for loops and game logic although I feel like I cheated quite a bit there
