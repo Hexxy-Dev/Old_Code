@@ -1,9 +1,16 @@
 #include <iostream>
 #include <fstream>
 
-#include "Console stuff.h"
+void clear() { puts("\033[H\033[J"); }
 
-using std::cout;
+#include <unistd.h>
+void sleep_ms(size_t milliseconds)
+{
+	struct timespec ts;
+    ts.tv_sec = milliseconds / 1000;
+    ts.tv_nsec = (milliseconds % 1000) * 1000000;
+    nanosleep(&ts, NULL);
+}
 
 //0 is empty      0
 //1 is white      down
@@ -46,7 +53,7 @@ void Populate_cube()
 }
 void Display_unfolded_cube()
 {
-	system("CLS");
+	clear();
 
 	std::string output = ".\n";
 
@@ -355,11 +362,11 @@ void Display_from_file()
 					Ui_move();
 				break;
 			default:
-				cout << "unknown move : " << char_array[0] << char_array[1];
+				std::cout << "unknown move : " << char_array[0] << char_array[1];
 				break;
 			}
 			Display_unfolded_cube();
-			temp_sleep(200);
+			sleep_ms(200);
 
 			times--;
 		}
@@ -368,9 +375,10 @@ void Display_from_file()
 
 int main()
 {
-	console_setup();
 	Populate_cube();
 	Display_unfolded_cube();
 
 	Display_from_file();
+
+	std::cin.get();
 }
