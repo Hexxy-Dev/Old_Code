@@ -2,7 +2,7 @@
 #include <random>
 #include <time.h>
 
-#include <Windows.h>
+void clear() { puts("\033[H\033[J"); }
 
 const uint8_t mineFieldWidth = 9 + 2;
 const uint8_t mineFieldHeight = 9 + 2;
@@ -67,7 +67,7 @@ void PlaceNumbers()
 
 void Display()
 {
-	system("CLS");
+	clear();
 	std::cout << "-1 ";
 	for (uint8_t i = 0; i < mineFieldHeight; i++)
 		std::cout << (int)i << ((i > 9) ? " " : "  ");
@@ -190,4 +190,5 @@ int main()
 		std::cout << "YOU WON!";
 	else
 		std::cout << "GAME OVER";
+	std::cin.get();
 }
