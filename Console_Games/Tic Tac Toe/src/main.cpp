@@ -1,7 +1,8 @@
 #include <iostream>
-#include <windows.h>
 #include <limits>
 #include <cmath>
+
+void clear() { puts("\033[H\033[J"); }
 
 using namespace std;
 
@@ -66,7 +67,7 @@ bool checkWin(){
 }
 
 void printBoard(){
-    system("CLS");
+    clear();
     for(i=0;i<3;i++){
         for(j=0;j<3;j++)
             cout<<v[i][j]<<" ";
@@ -172,9 +173,6 @@ int main(){
     if(difficulty == "Impossible")
         botStartFirst = 1;
 
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, 11);
-
     initializeBoard();
 
     while(true){
@@ -221,7 +219,7 @@ int main(){
             botStartFirst = 1;
         }
     }
+
+    std::cin.get();
+    std::cin.get();
 }
-
-
-
