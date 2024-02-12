@@ -12,9 +12,17 @@
 #include "Shader.h"
 #include "Texture.h"
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+//#include "glm/glm.hpp"
+//#include "glm/gtc/matrix_transform.hpp"
 
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
+#include "tests/TestClearColor.h"
+#include "tests/TestTexture2D.h"
+#include "tests/TestColorChangingQuad.h"
+#include "tests/TestBatchRendering.h"
 
 int main(void) {
     GLFWwindow* window;
@@ -26,7 +34,7 @@ int main(void) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(640, 480, "My window", NULL, NULL);
+    window = glfwCreateWindow(1920, 1080, "My window", NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;
@@ -41,81 +49,73 @@ int main(void) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
     {
-        float positions[] = {
-             100.0f, 100.0f, 0.0f, 0.0f,
-             200.0f, 100.0f, 1.0f, 0.0f,
-             200.0f, 200.0f, 1.0f, 1.0f,
-             100.0f, 200.0f, 0.0f, 1.0f,
-        };
-
-        unsigned int indices[] = {
-            0, 1, 2,
-            2, 3, 0
-        };
-
-        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-        GLCall(glEnable(GL_BLEND));
-
-        VertexArray va;
-
-        VertexBuffer vb(positions, 4 * 4 * sizeof(float));
-
-        VertexBufferLayout layout;
-        layout.Push<float>(2);
-        layout.Push<float>(2);
-        va.AddBuffer(vb, layout);
-
-        IndexBuffer ib(indices, 6);
-
-        glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));   // camera
-        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0)); // model
-        // the camera moving to the right is the equivalent of moving everything to the left
-
-        glm::mat4 mvp = proj * view * model; // in opengl it's pvm 
-
-        Shader shader("res/shaders/Basic.shader");
-        shader.Bind();
-        shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
-        shader.SetUniformMat4f("u_MVP", mvp);
-
-
-        Texture texture("res/textures/Logo.png");
-        texture.Bind();
-        shader.SetUniform1i("u_Texture", 0);
-
-        va.Unbind();
-        shader.Unbind();
-        vb.Unbind();
-        ib.Unbind();
-
         Renderer renderer;
 
-        float r = 0.0f;
-        float increment = 0.05f;
+        // GL 3.0 + GLSL 130
+        const char* glsl_version = "#version 130";
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
+        //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
+
+
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+        ImGui::StyleColorsDark();
+
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplOpenGL3_Init(glsl_version);
+
+        test::Test* currentTest = nullptr;
+        test::TestMenu* testMenu = new test::TestMenu(currentTest);
+        currentTest = testMenu;
+
+        testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+        testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
+        testMenu->RegisterTest<test::TestColorChangingQuad>("TestColorChangingQuad");
+        testMenu->RegisterTest<test::TestBatchRendering>("TestBatchRendering");
 
         while (!glfwWindowShouldClose(window)) {
+
+            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             renderer.Clear();
 
-            shader.Bind();
-            shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
 
-            renderer.Draw(va, ib, shader);
+            if (currentTest)
+            {
+                currentTest->OnUpdate(0.0f);
+                currentTest->OnRender();
+                ImGui::Begin("Test");
+                if (currentTest != testMenu && ImGui::Button("<-"))
+                {
+                    delete currentTest;
+                    currentTest = testMenu;
+                }
+                currentTest->OnImGuiRender();
+                ImGui::End();
+            }
 
-            if (r > 1.0f)
-                increment = -0.05f;
-            else if (r < 0.0f)
-                increment = 0.05f;
+            ImGui::Render();
 
-            r += increment;
-
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(window);
 
             glfwPollEvents();
         }
-
+        delete currentTest;
+        if (currentTest != testMenu)
+            delete testMenu;
     }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
     glfwTerminate();
     return 0;
 }
