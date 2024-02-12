@@ -1,0 +1,1 @@
+Tiny snippet with a simple premise: print all numbers from 1 to 100 with no digits in the source code
