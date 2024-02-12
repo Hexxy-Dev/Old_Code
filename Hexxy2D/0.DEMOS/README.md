@@ -23,3 +23,9 @@
 ![](./IMAGES/Conway%20Small.gif)
 ![](./IMAGES/Conway%20Medium.gif)
 ![](./IMAGES/Conway%20Big.gif)
+
+# Text
+
+![](./IMAGES/3x3.png)
+![](./IMAGES/5x5L.png)
+![](./IMAGES/5x5H.png)
