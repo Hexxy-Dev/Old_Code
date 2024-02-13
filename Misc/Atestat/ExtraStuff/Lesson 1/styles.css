@@ -1,0 +1,97 @@
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    color:lightseagreen;
+    font-style: italic;
+
+    border: 3px solid gold;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+p#MOTTO {
+    text-align: center;
+    border: 2px dashed turquoise;
+}
+
+body {
+    background-color: #162e25;
+}
+
+h2 {
+    color: cyan;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+section {
+    background: #162e25;
+    color: rgb(118, 185, 8);
+}
+
+section:nth-of-type(1) {
+    background-color: #0f4b35;
+}
+
+a {
+    color: salmon;
+}
+
+a:hover {
+    color: gold;
+}
+
+table {
+    border: 3px solid gold;
+    margin: 5px;
+}
+
+th {
+    border: 2px solid steelblue;
+    font-size: 20px;
+}
+
+td {
+    border: 1px solid snow;
+    font-size: 15px;
+}
+
+td, th {
+    font-family: cursive;
+    padding: 3px;
+}
+
+iframe {
+    height: 60vh;
+    width: 75vw;
+}
+
+img {
+    height: auto;
+    width: 25%;
+}
+
+img:hover {
+    opacity: 50%;
+}
+
+header p {
+    border-color: #255f4a;
+}
+
+.NOOM {
+    background-color: #094e34;
+}
+
+#projects {
+    font: 20px, 'Courier New', Courier, monospace;
+}
+
+header img {
+    display: block;
+    margin: auto;
+}
+
+#projects img {
+    width: auto;
+    height: 400px;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../CommonStyles.css">
+    <link rel="stylesheet" href="./Styles.css">
+    <title>js Tutorial</title>
+
+    <script src="./main.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Lesson 2</h1>
+    </header>
+
+    <div id="Buttons_Collection">
+        <h2>javascript tutorial</h2>
+        <h3>Inline js</h3>
+        <button onclick="alert('THIS IS AN ALERT')">Show alert</button>
+        <button onclick="this.style='color: var(--red)'">Change my color</button>
+        <button onclick="this.remove()">Remove Me</button>
+        
+        <h3>php</h3>
+        <h4>ex1</h4>
+        <form action="http://localhost/Hexxy/e1.php" method="POST">
+            <input type="submit" name="submit">
+            <input type="text" name="t1">
+        </form>
+        <div style="height:100px"></div>
+        <h4>ex1</h4>
+        <form action="http://localhost/Hexxy/e2.php" method="POST" target="iframe1">
+            <input type="submit" name="submit">
+            <input type="text" name="t1">
+        </form>
+        <iframe name="iframe1" frameborder="0"></iframe>
+    </div>
+    <br><br>
+
+    <section id="positioning">
+        <h3>Element positioning</h3>
+        
+        <span id="r">relative</span>
+        <span>after relative</span><br>
+        
+        <span id="a">absolute</span>
+        <span>after absolute</span><br>
+        
+        <span id="f">fixed</span>
+        <span>after fixed</span><br><br>
+
+        <span id="st">sticky</span>
+        <span>after sticky</span>
+
+        <!-- for scrolling purposes -->
+        <div id="EmptySpace" style="height: 1700px;"></div>
+    </section>
+</body>
+</html>

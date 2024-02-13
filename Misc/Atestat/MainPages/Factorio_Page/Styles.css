@@ -1,0 +1,154 @@
+@import '../../Commons/CommonStyles.css';
+
+/*#### PageSpecificVariables ####*/
+:root {
+    --MenuWidth: 3.5vw;
+    --MenuVisibility: hidden;
+    --MenuTransitionTime: 0.4s;
+}
+
+
+/*#### Content ####*/
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#Content {
+    margin-left: calc(var(--MenuWidth) + 1vw);
+    height: 99vh;
+    width: calc(98vw - var(--MenuWidth));
+    transition: margin-left var(--MenuTransitionTime)
+    , width var(--MenuTransitionTime);
+}
+
+header img {
+    margin: auto;
+    display: block;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 40px;
+    color: #ff8800;
+}
+
+section {
+    border-radius: 25px;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 20px;
+    background-color: var(--base02);
+    font-size: 30px;
+    color: var(--green);
+}
+
+h1 {
+    text-align: left;
+    font-size: 50px;
+}
+
+iframe {
+    width: 100%;
+    height: 80vh;
+}
+
+#Achievements {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+#Achievements th {
+    color: var(--violet);
+    font-size: 40px;
+}
+
+#Achievements td {
+    color: var(--magenta);
+    width: 30vw;
+}
+
+#Achievements td:nth-of-type(1) {
+    width: 80px;
+}
+
+#Achievements td:nth-of-type(2) {
+    text-align: center;
+    color: var(--cyan);
+}
+
+#Achievements tr {
+    border-bottom: 3px solid var(--base00);
+}
+
+li {
+    display: contents;
+    cursor: pointer;
+    color: var(--blue);
+}
+
+#resources {
+    position: relative;
+}
+
+.ResourceZoom {
+    position: absolute;
+    top: 0;
+    right: 25%;
+    width: 400px;
+    height: 400px;
+}
+
+.hidden {
+    display: none;
+}
+
+.on_hover:hover + .hidden {
+    display: block;
+}
+
+h3 {
+    color: var(--orange);
+    font-size: 40px;
+    text-align: center;
+}
+
+/*#### Menu ####*/
+#MenuBar {
+    position: fixed;
+    height: 100vh;
+    width: var(--MenuWidth);
+    background-color: var(--base02);
+    transition: width var(--MenuTransitionTime);
+    overflow: hidden;
+    filter: brightness(90%);
+}
+
+.MenuItem {
+    display: block;
+    /*        T    R   B   L*/
+    margin: 10px 10px 0px 10px;
+    padding: 5px;
+    padding-left: 15px;
+    border-radius: 25px;
+    visibility: var(--MenuVisibility);
+    color: var(--red);
+    font-style: normal;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: var(--base03);
+}
+
+#MenuButton {
+    margin: 10px;
+    margin-left: 7px;
+    scale: 2;
+}
+
+/*#### MenuFunctionality ####*/
+:root:has(#MenuButton:checked) {
+    --MenuWidth: 10vw;
+    --MenuVisibility: visible;
+}

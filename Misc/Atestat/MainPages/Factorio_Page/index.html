@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./Styles.css">
+        <title>Factorio</title>
+    </head>
+    <body>
+        <!-- --COLOR SCHEME SELECTOR TEMPLATE-- -->
+        <div id="ColorSchemeMenu">
+            <input type="checkbox" id="ColorSchemeMenuOpen">
+            <div id="ColorSchemeMenuHidden">
+                <table>
+                    <tr>
+                        <td><label for="DarkMode">DarkMode</label></td>
+                        <td><input type="radio" name="ColorSchemeMenuOption" id="DarkMode" checked></td>
+                    </tr>
+                    <tr>
+                        <td><label for="LightMode">LightMode</label></td>
+                        <td><input type="radio" name="ColorSchemeMenuOption" id="LightMode"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- --COLOR SCHEME SELECTOR TEMPLATE-- -->
+
+        <div id="MenuBar">
+            <input type="checkbox" name="" id="MenuButton">
+            <br><br>
+            <a class="MenuItem" href="#Introduction">Introduction</a>
+            <a class="MenuItem" href="#Story">The "Story"</a>
+            <a class="MenuItem" href="#Description">Description</a>
+            <a class="MenuItem" href="#Quick_start_guide">Quick start guide</a>
+            <a class="MenuItem" href="#Achievements">Achievements</a>
+            <a class="MenuItem" href="#Basic_resources">Basic resources</a>
+            <a class="MenuItem" href="#Showcase">Showcase</a>
+        </div>
+
+        <main id="Content">
+            <header>
+                <img src="factorio-logo.png" alt="Factorio">
+                <h2>A <element onclick="alert('Not so short actually')">"short"</element> overview</h2>
+            </header>
+    
+            <a id="Introduction"></a>
+            <section>
+                <h1>Introduction:</h1>
+                Let's skip the preamble, shall we? Factorio is brilliant. If you're remotely interested in games about management, construction, and above all production chains, then hop aboard the nearest conveyor belt and grab yourself a copy of Factorio this instant. Then pick up another copy for the most important person in your life, because they won't be seeing you for a while, and at least this way they'll understand why.
+            </section>
+    
+            <a id="Story"></a>
+            <section>
+                <h1>The "Story":</h1>
+                Factorio starts out as all great works of fiction do, with a huge explosion. That would be your spaceship crashing onto a remote alien planet, and the only way off that far-flung rock is to build yourself a whole new rocket. Oops. Luckily, you happen to be the handiest person in the entire universe, able to fashion almost anything with little more than spit and elbow grease. Whether it's a stone furnace, a steam engine, or an oil refinery, give your little protagonist the ingredients, and they'll slap it together like a two-piece jigsaw.
+            </section>
+
+            <section>
+                <div style="margin: auto; overflow: hidden; height: 550px; width: 1355px;">
+                    <iframe style="pointer-events: none;" src='https://gfycat.com/ifr/AnnualRaggedIndianringneckparakeet' frameborder='0' scrolling='no' allowfullscreen></iframe>
+                </div>
+            </section>
+    
+            <a id="Description"></a>
+            <section>
+                <h1>Description:</h1>
+                Factorio is a game in which you build and maintain factories. You will be mining resources, researching technologies, building infrastructure, automating production and fighting enemies.
+                <br><br>
+                In the beginning you will find yourself chopping trees, mining ores and crafting mechanical arms and transport belts by hand, but in short time you can become an industrial powerhouse, with huge solar fields, oil refining and cracking, manufacture and deployment of construction and logistic robots, all for your resource needs. However this heavy exploitation of the planet's resources does not sit nicely with the locals, so you will have to be prepared to defend yourself and your machine empire.
+                <br><br>
+                Join forces with other players in cooperative Multiplayer, create huge factories, collaborate and delegate tasks between you and your friends.
+                <br><br>
+                Add mods to increase your enjoyment, from small tweak and helper mods to complete game overhauls, Factorio's ground-up Modding support has allowed content creators from around the world to design interesting and innovative features. While the core gameplay is in the form of the freeplay scenario, there are a range of interesting challenges in the form of the Scenario pack, available as free DLC. If you don't find any maps or scenarios you enjoy, you can create your own with the in-game Map Editor, place down entities, enemies, and terrain in any way you like, and even add your own custom script to make for interesting gameplay.
+            </section>
+
+            <a id="Quick_start_guide"></a>
+            <section>
+                <h1>"Quick" start guide:</h1>
+                <iframe src="https://wiki.factorio.com/Tutorial:Quick_start_guide" frameborder="0"></iframe>
+            </section>
+
+            <a id="Achievements"></a>
+            <section>
+                <h1>Achievements:</h1>
+                <table id="Achievements">
+                    <tr>
+                        <th>Icon</th>
+                        <th>Achievement Name</th>
+                        <th>How to obtain</th>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Getting-on-track-achievement.png/80px-Getting-on-track-achievement.png" alt=""></td>
+                        <td>Getting on track</td>
+                        <td>Build a locomotive.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Eco-unfriendly-achievement.png/80px-Eco-unfriendly-achievement.png" alt=""></td>
+                        <td>Eco unfriendly</td>
+                        <td>Research oil processing (research).</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Tech-maniac-achievement.png/80px-Tech-maniac-achievement.png" alt=""></td>
+                        <td>Tech maniac</td>
+                        <td>Research all technologies.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Smoke-me-a-kipper-i-will-be-back-for-breakfast-achievement.png/80px-Smoke-me-a-kipper-i-will-be-back-for-breakfast-achievement.png" alt=""></td>
+                        <td>Smoke me a kipper, I'll be back for breakfast</td>
+                        <td>Finish the game.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/It-stinks-and-they-dont-like-it-achievement.png/80px-It-stinks-and-they-dont-like-it-achievement.png" alt=""></td>
+                        <td>It stinks and they dont like it</td>
+                        <td>Trigger an alien attack by pollution.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Automated-construction-achievement.png/80px-Automated-construction-achievement.png" alt=""></td>
+                        <td>Automated construction</td>
+                        <td>Construct 100 machines using robots.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/You-are-doing-it-right-achievement.png/80px-You-are-doing-it-right-achievement.png" alt=""></td>
+                        <td>You are doing it right</td>
+                        <td>Construct more machines using robots than manually.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Automated-cleanup-achievement.png/80px-Automated-cleanup-achievement.png" alt=""></td>
+                        <td>Automated cleanup</td>
+                        <td>Deconstruct 100 objects with the construction robots.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/You-have-got-a-package-achievement.png/80px-You-have-got-a-package-achievement.png" alt=""></td>
+                        <td>You've got a package</td>
+                        <td>Supply the player by logistic robot.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Delivery-service-achievement.png/80px-Delivery-service-achievement.png" alt=""></td>
+                        <td>Delivery service</td>
+                        <td>Supply the player with 10k items delivered by logistic robots.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Trans-factorio-express-achievement.png/80px-Trans-factorio-express-achievement.png" alt=""></td>
+                        <td>Trans-Factorio express</td>
+                        <td>Have a train plan a path 1000 tiles or longer.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Watch-your-step-achievement.png/80px-Watch-your-step-achievement.png" alt=""></td>
+                        <td>Watch your step</td>
+                        <td>Get killed by a moving locomotive.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Golem-achievement.png/80px-Golem-achievement.png" alt=""></td>
+                        <td>Golem</td>
+                        <td>Survive a hit of 500 damage or more.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Getting-on-track-like-a-pro-achievement.png/80px-Getting-on-track-like-a-pro-achievement.png" alt=""></td>
+                        <td>Getting on track like a pro</td>
+                        <td>Build a locomotive within the first 90 minutes of the game.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Mass-production-1-achievement.png/80px-Mass-production-1-achievement.png" alt=""></td>
+                        <td>Mass production 1</td>
+                        <td>Produce 10k electronic circuits.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Mass-production-2-achievement.png/80px-Mass-production-2-achievement.png" alt=""></td>
+                        <td>Mass production 2</td>
+                        <td>Produce 1M electronic circuits.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Mass-production-3-achievement.png/80px-Mass-production-3-achievement.png" alt=""></td>
+                        <td>Mass production 3</td>
+                        <td>Produce 20M electronic circuits.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Circuit-veteran-1-achievement.png/80px-Circuit-veteran-1-achievement.png" alt=""></td>
+                        <td>Circuit veteran 1</td>
+                        <td>Produce 1.0k advanced circuits per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Circuit-veteran-2-achievement.png/80px-Circuit-veteran-2-achievement.png" alt=""></td>
+                        <td>Circuit veteran 2</td>
+                        <td>Produce 10k advanced circuits per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Circuit-veteran-3-achievement.png/80px-Circuit-veteran-3-achievement.png" alt=""></td>
+                        <td>Circuit veteran 3</td>
+                        <td>Produce 25k advanced circuits per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Computer-age-1-achievement.png/80px-Computer-age-1-achievement.png" alt=""></td>
+                        <td>Computer age 1</td>
+                        <td>Produce 500 processing units per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Computer-age-2-achievement.png/80px-Computer-age-2-achievement.png" alt=""></td>
+                        <td>Computer age 2</td>
+                        <td>Produce 1.0k processing units per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Computer-age-3-achievement.png/80px-Computer-age-3-achievement.png" alt=""></td>
+                        <td>Computer age 3</td>
+                        <td>Produce 5k processing units per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Iron-throne-1-achievement.png/80px-Iron-throne-1-achievement.png" alt=""></td>
+                        <td>Iron throne 1 </td>
+                        <td>Produce 20k iron plates per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Iron-throne-2-achievement.png/80px-Iron-throne-2-achievement.png" alt=""></td>
+                        <td>Iron throne 2</td>
+                        <td>Produce 200k iron plates per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Iron-throne-3-achievement.png/80px-Iron-throne-3-achievement.png" alt=""></td>
+                        <td>Iron throne 3</td>
+                        <td>Produce 400k iron plates per hour.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Solaris-achievement.png/80px-Solaris-achievement.png" alt=""></td>
+                        <td>Solaris</td>
+                        <td>Produce more than 10 GJ per hour using only solar panels.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Steamrolled-achievement.png/80px-Steamrolled-achievement.png" alt=""></td>
+                        <td>Steamrolled</td>
+                        <td>Destroy 10 spawners by impact.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Pyromaniac-achievement.png/80px-Pyromaniac-achievement.png" alt=""></td>
+                        <td>Pyromaniac</td>
+                        <td>Destroy 10k trees with fire.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Run-forrest-run-achievement.png/80px-Run-forrest-run-achievement.png" alt=""></td>
+                        <td>Run Forrest, run</td>
+                        <td>Destroy 100 trees by impact.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Minions-achievement.png/80px-Minions-achievement.png" alt=""></td>
+                        <td>Minions</td>
+                        <td>Have 100 combat robots or more following you.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Lazy-bastard-achievement.png/80px-Lazy-bastard-achievement.png" alt=""></td>
+                        <td>Lazy bastard</td>
+                        <td>Win the game by crafting no more than 111 items manually.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Steam-all-the-way-achievement.png/80px-Steam-all-the-way-achievement.png" alt=""></td>
+                        <td>Steam all the way</td>
+                        <td>Win the game without building any solar panels.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Raining-bullets-achievement.png/80px-Raining-bullets-achievement.png" alt=""></td>
+                        <td>Raining bullets</td>
+                        <td>Win the game without building any laser turrets.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/Logistic-network-embargo-achievement.png/80px-Logistic-network-embargo-achievement.png" alt=""></td>
+                        <td>Logistic network embargo</td>
+                        <td>Win the game without building any active provider, buffer or requester chests.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/No-time-for-chitchat-achievement.png/80px-No-time-for-chitchat-achievement.png" alt=""></td>
+                        <td>No time for chitchat</td>
+                        <td>Finish the game within 15 hours.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/There-is-no-spoon-achievement.png/80px-There-is-no-spoon-achievement.png" alt=""></td>
+                        <td>There is no spoon</td>
+                        <td>Finish the game within 8 hours.</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://wiki.factorio.com/images/thumb/So-long-and-thanks-for-all-the-fish-achievement.png/80px-So-long-and-thanks-for-all-the-fish-achievement.png" alt=""></td>
+                        <td>So long and thanks for all the fish</td>
+                        <td>Send a raw fish into space via rocket.</td>
+                    </tr>
+                </table>
+            </section>
+
+            <a id="Basic_resources"></a>
+            <section style="position:relative">
+                <h1 style="display: inline-block;">Basic resources:</h1>
+                <h1 class="ResourceZoom" style="display: inline-block; right: 20.5%;">In world:</h1>
+                <ul style="position: relative;">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Wood.png/32px-Wood.png" alt=""></td>
+                            <td>Wood</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Trees_in_world.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Stone.png/32px-Stone.png" alt=""></td>
+                            <td>Stone</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Stone_entity.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Coal.png/32px-Coal.png" alt=""></td>
+                            <td>Coal</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Coal_entity.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Copper_ore.png/32px-Copper_ore.png" alt=""></td>
+                            <td>Copper ore</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Copper_ore_entity.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Iron_ore.png/32px-Iron_ore.png" alt=""></td>
+                            <td>Iron ore</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Iron_ore_entity.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Crude_oil.png/32px-Crude_oil.png" alt=""></td>
+                            <td>Crude oil</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Crude_oil_entity.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Uranium_ore.png/32px-Uranium_ore.png" alt=""></td>
+                            <td>Uranium ore</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Uranium_ore_daynight_anim.gif" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Water.png/32px-Water.png" alt=""></td>
+                            <td>Water</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Water_body_view.png" alt="">
+                    <li class="on_hover"><table>
+                        <tr>
+                            <td><img src="https://wiki.factorio.com/images/thumb/Raw_fish.png/32px-Raw_fish.png" alt=""></td>
+                            <td>Raw fish</td>
+                        </tr>
+                    </table></li>
+                    <img class="ResourceZoom hidden" src="https://wiki.factorio.com/images/Water_with_fish.png" alt="">
+                </ul>
+            </section>
+
+            <a id="Showcase"></a>
+            <section>
+                <h1>Showcase:</h1>
+
+                <h3>Create Megabases:</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/y0MZzUxnnTY?controls=0&amp;start=5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <h3>So advanced it can even play videos! (with sound):</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/tihwC6FLB3E?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+                <h3>Render wireframes:</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/nyHzfVnI4J8?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <h3>Multiplayer games:</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/7lVAFcDX4eM?controls=0&amp;start=216" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <h3>Or even a fully functional RAYCAST FPS game:</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/0bAuP0gO5pc?controls=0&amp;start=20" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </section>
+        </main>
+    </body>
+</html>

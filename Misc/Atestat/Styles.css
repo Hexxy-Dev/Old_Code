@@ -1,0 +1,41 @@
+@import './Commons/CommonStyles.css';
+
+h1 {
+    font-size: 70px;
+}
+
+a {
+    padding: 0;
+    border-radius: 35px;
+    display: inline-block;
+    margin-left: 2vw;
+    margin-top: 1vw;
+    border: 5px solid var(--base01);
+    transition: 0.5s ease-in-out;
+}
+
+a:hover {
+   scale: 1.06;
+}
+
+iframe {
+    border-radius: 35px;
+    width: 45vw;
+    height: 35vw;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+section {
+    display: inline-block;
+}
+
+#ExtraStuff {
+    margin-top: 50vh;
+    display: flex;
+    justify-content: center;
+}
+#ExtraStuff iframe {
+    width: 35vw;
+    height: 35vh;
+}
