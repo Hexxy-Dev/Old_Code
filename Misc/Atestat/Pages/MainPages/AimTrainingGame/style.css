@@ -1,0 +1,156 @@
+@import "../../Commons/CommonStyles.css";
+
+.circle {
+    position: absolute;
+    border-radius: 100%;
+    background-color: var(--violet);
+    border: 8px solid var(--magenta);
+    transform: translate(-50%, -50%);
+    transform-origin: 0 0;
+}
+.circleCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    background-color: var(--red);
+}
+
+
+/*---- Menu ----*/
+
+#TopBar, #Menu {
+    text-align: center;
+}
+h1 {
+    margin: 0;
+    padding: 0;
+    color: var(--cyan);
+    display: inline-block;
+    font-size: 40px;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+button {
+    background-color: var(--base03);
+    color: var(--cyan);
+    border-radius: 100%;
+    font-size: 70px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 8px solid var(--base01);
+    transition: 0.3s;
+}
+button:hover {
+    scale: 1.15;
+    transition: 0.3s;
+}
+#CustomGame {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#BackButton {
+    transform: scale(50%);
+}
+
+#DifficultySelect {
+    position: absolute;
+    transform: translate(200%,-100%);
+}
+#DifficultySelect h1 {
+    font-size: 60px;
+}
+#DifficultySelect table {
+    text-align: left;
+    border-spacing: 20px;
+}
+#DifficultySelect label {
+    color: var(--cyan);
+    font-size: 50px;
+    font-weight: bold;
+}
+#DifficultySelect input {
+    scale: 2.5;
+}
+
+#CustomGameMenu label,input {
+    color: var(--cyan);
+    font-size: 50px;
+}
+
+#GameOverScreen {
+    text-align: center;
+    font-size: 70px;
+}
+#GameOverScreen h1 {
+    font-size: 100px;
+}
+#GameOverScreen h2 {
+    font-size: 60px;
+}
+#GameOverScreen label {
+    color: var(--red);
+}
+
+/*---- LeaderBoard ----*/
+
+#LeaderBoard {
+    display: inline-block;
+    position: absolute;
+    transform: translate(-150%,-20%);
+    height: 60vh;
+    overflow: auto;
+    font-family: monospace;
+}
+#LeaderBoard::-webkit-scrollbar {
+    width: 0px;
+}
+
+#LeaderBoardTable {
+    color: var(--cyan);
+    font-size: 40px;
+    border-spacing: 20px 0px;
+    text-align: center;
+}
+#LeaderBoardTable {
+    border: 5px solid var(--blue);
+}
+
+/*---- TopBar ----*/
+
+#TopBar {
+    user-select: none;
+}
+#Score {
+    position: absolute;
+    left: 39vw;
+    font-size: 60px;
+}
+#Combo {
+    position: absolute;
+    left: 20vw;
+}
+#Misses {
+    position: absolute;
+    left: 20vw;
+    top: 42px;
+}
+#TimeScore {
+    position: absolute;
+    left: 65vw;
+    top: 42px;
+}
+#AccuracyScore {
+    position: absolute;
+    left: 65vw;
+}

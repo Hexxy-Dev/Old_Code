@@ -100,12 +100,8 @@ li {
     height: 400px;
 }
 
-.hidden {
-    display: none;
-}
-
 .on_hover:hover + .hidden {
-    display: block;
+    display: block !important;
 }
 
 h3 {
@@ -127,7 +123,6 @@ h3 {
 
 .MenuItem {
     display: block;
-    /*        T    R   B   L*/
     margin: 10px 10px 0px 10px;
     padding: 5px;
     padding-left: 15px;

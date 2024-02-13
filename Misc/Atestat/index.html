@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./Styles.css">
+        <link rel="stylesheet" href="./style.css">
         <title>Index Page</title>
     </head>
     <body>
@@ -10,22 +10,44 @@
                 Currentlly Available Pages:
             </h1>
         </header>
+
+        <script>
+            function LoadPages(RelativePagePaths, Destination) {
+                for(PagePath of RelativePagePaths) {
+                    const link = document.createElement("a");
+                    link.href = PagePath;
+                    
+                    const iframe = document.createElement("iframe");
+                    iframe.scrolling = "no";
+                    iframe.frameBorder = "0";
+                    iframe.src = PagePath;
+                    iframe.sandbox = "allow-same-origin";
+
+                    link.appendChild(iframe);
+                    Destination.appendChild(link);
+                }
+            }
+        </script>
+
         <section id="MainPages">
-            <a href="./MainPages/Factorio_Page/index.html">
-                <iframe scrolling="no" src="./MainPages/Factorio_Page/index.html" frameborder="0"></iframe>
-            </a>
-        </section>
-        <section>
-            
+            <script>
+                const MainPagesRelativePaths = [
+                    "./Pages/MainPages/Factorio/index.html",
+                    "./Pages/MainPages/AimTrainingGame/index.html",
+                    
+                ];
+                LoadPages(MainPagesRelativePaths, document.getElementById("MainPages"));
+            </script>
         </section>
 
         <div id="ExtraStuff">
-            <a href="./ExtraStuff/Lesson 1/index.html">
-                <iframe scrolling="no" src="./ExtraStuff/Lesson 1/index.html" frameborder="0"></iframe>
-            </a>
-            <a href="./ExtraStuff/Lesson 2/index.html">
-                <iframe scrolling="no" src="./ExtraStuff/Lesson 2/index.html" frameborder="0"></iframe>
-            </a>
+            <script>
+                const ExtraStuffRelativePaths = [
+                    "./Pages/ExtraStuff/Lesson 1/index.html",
+                    "./Pages/ExtraStuff/Lesson 2/index.html"
+                ];
+                LoadPages(ExtraStuffRelativePaths, document.getElementById("ExtraStuff"));
+            </script>
         </div>
     </body>
 </html>

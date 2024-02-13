@@ -1,16 +1,17 @@
-@import './Commons/CommonStyles.css';
+@import './Pages/Commons/CommonStyles.css';
 
 h1 {
     font-size: 70px;
 }
 
 a {
-    padding: 0;
-    border-radius: 35px;
+    border-radius: 36px;
     display: inline-block;
     margin-left: 2vw;
     margin-top: 1vw;
-    border: 5px solid var(--base01);
+    width: 45vw;
+    height: 35vw;
+    border: 6px solid var(--base01);
     transition: 0.5s ease-in-out;
 }
 
@@ -19,9 +20,10 @@ a:hover {
 }
 
 iframe {
-    border-radius: 35px;
-    width: 45vw;
-    height: 35vw;
+    border-radius: inherit;
+    width: inherit;
+    height: inherit;
+    scale: 1.01;
     pointer-events: none;
     overflow: hidden;
 }
@@ -35,7 +37,7 @@ section {
     display: flex;
     justify-content: center;
 }
-#ExtraStuff iframe {
+#ExtraStuff a {
     width: 35vw;
-    height: 35vh;
+    height: 25vw;
 }

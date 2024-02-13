@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <title>AimTrainer</title>
+</head>
+<body>
+    <script src="../../Commons/Templates/TopRightMenu.js"></script>
+    <div id="TopBar" hidden="true">
+        <h1 id="Combo">Combo: 0</h1>
+        <h1 id="Misses">Misses: 0</h1>
+        <h1 id="Score">Score: 0</h1>
+        <h1 id="AccuracyScore">Accuracy: 100%</h1>
+        <h1 id="TimeScore">Timing: 0ms</h1>
+    </div>
+    <div id="Menu">
+        <h1>AimTrainer V2.7.4</h1>
+        <div id="MenuContents" class="center">
+            <div id="LeaderBoard" class="hidden">
+                <h1>LeaderBoard</h1>
+                <table id="LeaderBoardTable">
+                    <tr><th>Name</th><th>Score</th></tr>
+                </table>
+            </div>
+            <div>
+                <button id="Start" onclick="Start()">START</button><br>
+                <button id="CustomGame" onclick="document.getElementById('CustomGameMenu').hidden=false;
+                                                 document.getElementById('Menu').hidden=true">Settings</button>
+            </div>
+            <div hidden id="DifficultySelect">
+                <h1>Difficulty:</h1><br>
+                <table>
+                    <tr>
+                        <td><input type="radio" name="Difficulty" id="Easy"></td>
+                        <td><label for="Easy">Easy</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="Difficulty" id="Medium"></td>
+                        <td><label for="Medium">Medium</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="Difficulty" id="Hard"></td>
+                        <td><label for="Hard">Hard</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="Difficulty" id="Noom?" checked></td>
+                        <td><label for="Noom?">Noom?</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="Difficulty" id="Custom"></td>
+                        <td><label for="Custom">Custom</label></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="CustomGameMenu" hidden="true">
+        <button id="BackButton" onclick="document.getElementById('CustomGameMenu').hidden=true;
+                                         document.getElementById('Menu').hidden=false">Back</button>
+        <br>
+        <h1>These settings only appy to the Custom Difficulty</h1>
+        <h1>On this difficulty you will not be able to submit any scores</h1>
+        <table>
+            <tr>
+                <td><label for="CustomCircleSize">CircleSize(px)</label></td>
+                <td><input type = "number" value="100" id="CustomCircleSize"></td>
+            </tr>
+            <tr>
+                <td><label for="CustomCircleLifeTimeMin">CircleLifeTimeMin(ms)</label></td>
+                <td><input type = "number" value="300" id="CustomCircleLifeTimeMin"></td>
+            </tr>
+            <tr>
+                <td><label for="CustomCircleLifeTimeMax">CircleLifeTimeMax(ms)</label></td>
+                <td><input type = "number" value="700" id="CustomCircleLifeTimeMax"></td>
+            </tr>
+            <tr>
+                <td><label for="CustomSpawnRate">SpawnRate(ms)</label></td>
+                <td><input type = "number" value="1000" id="CustomSpawnRate"></td>
+            </tr>
+            <tr>
+                <td><label for="CustomMaxMisses">MaxMisses</label></td>
+                <td><input type = "number" value="20" id="CustomMaxMisses"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="GameOverScreen" class="center" hidden>
+        <h1>GameOver!!</h1>
+        <h2 id="FinalScore">Final Score:</h2>
+        <form  autocomplete="off" target="dummyframe" method="post" action="http://localhost/Hexxy/AimTrainer/AddLeaderboardData.php">
+            <label for="Name">Name:</label>
+            <input type="text" name="Name" id="Name" maxlength="5">
+            <input type="hidden" name="Score" id="hiddenFormField-Score">
+            <input type="submit" value="submit" onclick="this.hidden=true;DelayThenReload()">
+        </form>
+        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+        <script>async function DelayThenReload()
+            { await new Promise(r => setTimeout(r, 300)); location.reload(); }
+        </script>
+    </div>
+    <script>
+        //-------Settings-------
+        let CircleSize; // in px
+        let CircleLifeTimeMin; // in ms
+        let CircleLifeTimeMax; // in ms
+        let SpawnRate; // in ms
+        let DifficultyMultiplier;
+        let MaxMisses;
+        //-------/Settings------
+
+        let Score = 0;
+        let Combo = 0;
+        let Misses = 0;
+        let TimeScore = 0.0;
+        let AccuracyScore = 100;
+        
+        const BorderSpace = 100;
+        const MaxX = window.innerWidth - BorderSpace;
+        const MaxY = window.innerHeight  - BorderSpace;
+        let DestroyAllCircles = false;
+
+        const ScoreText = document.getElementById("Score");
+        
+        const ComboText = document.getElementById("Combo");
+        const MissesText = document.getElementById("Misses");
+
+        const AccuracyScoreText = document.getElementById("AccuracyScore");
+        const TimeScoreText = document.getElementById("TimeScore");
+
+        function UpdateScore() {
+            ScoreText.innerText = `Score: ${Score}`;
+
+            ComboText.innerText = `Combo: ${Combo}`;
+            MissesText.innerText = `Misses: ${Misses}`;
+
+            AccuracyScoreText.innerText = `Accuracy: ${AccuracyScore}%`;
+            TimeScoreText.innerText = `Timing: ${TimeScore}ms`;
+        }
+
+
+        function RandomIntInRange(min,max) {
+            return (Math.random() * (max - min)) + min;
+        }
+
+        function SpawnCircle(X,Y,lifeTime) {
+            let circle = document.createElement("div");
+            circle.classList.add("circle");
+            circle.style.left = `${X}px`;
+            circle.style.top = `${Y}px`;
+            circle.style.height = `${CircleSize}px`;
+            circle.style.width = `${CircleSize}px`;
+            circle.style.scale = 1.0;
+
+            let circleCenter = document.createElement("div");
+            circleCenter.classList.add("circleCenter");
+
+            circle.appendChild(circleCenter);
+
+
+            const interval = setInterval(() => {
+                circle.style.scale -= 1 / lifeTime;
+                if(circle.style.scale <= 0 || DestroyAllCircles) {
+                    Misses++;
+                    Combo = 0;
+                    circle.remove();
+                    clearInterval(interval);
+                    UpdateScore();
+                }
+            }, 1);
+
+            circle.addEventListener('click', (event) => {
+                Combo++;
+
+                const time = parseFloat(circle.style.scale) * 100;
+                TimeScore = Math.round((TimeScore + time) / 2);
+                
+                const relX = Math.max(X, event.clientX) - Math.min(X, event.clientX);
+                const relY = Math.max(Y, event.clientY) - Math.min(Y, event.clientY);
+                const acc = 100 - (100 / (CircleSize / 2)) * ((relX + relY) / 2);
+                AccuracyScore = Math.round((AccuracyScore + Math.round(acc)) / 2);
+
+                const score = (time + acc) / 2 * DifficultyMultiplier;
+                console.log(Math.round(score + score * (Combo / 2 / 100)));
+                Score += Math.round(score + score * (Combo / 2 / 100));
+
+                UpdateScore();
+                circle.remove();
+                clearInterval(interval);
+            });
+
+            document.body.appendChild(circle);
+        }
+        function SelectDifficulty() {
+            var difficulties = document.getElementsByName("Difficulty");
+            var selectedDifficulty;
+
+            for(var i = 0; i < difficulties.length; i++) {
+            if(difficulties[i].checked)
+                selectedDifficulty = difficulties[i].id;
+            }
+            switch(selectedDifficulty) {
+                case 'Easy':
+                    [DifficultyMultiplier,SpawnRate,CircleSize,CircleLifeTimeMin,CircleLifeTimeMax,MaxMisses] = [
+                     0.5,                 1400,     200,       500,              900,              20];
+                    break;
+                case 'Medium':
+                    [DifficultyMultiplier,SpawnRate,CircleSize,CircleLifeTimeMin,CircleLifeTimeMax,MaxMisses] = [
+                     0.8,                 1000,     150,       400,              800,              15];
+                    break;
+                case 'Hard':
+                    [DifficultyMultiplier,SpawnRate,CircleSize,CircleLifeTimeMin,CircleLifeTimeMax,MaxMisses] = [
+                     1.0,                 700,      100,       300,              700,              10];
+                    break;
+                case 'Noom?':
+                    [DifficultyMultiplier,SpawnRate,CircleSize,CircleLifeTimeMin,CircleLifeTimeMax,MaxMisses] = [
+                     1.5,                 500,      100,       300,              400,              10];
+                    break;
+                case 'Custom':
+                    DifficultyMultiplier = 0.0;
+                    SpawnRate =  parseInt(document.getElementById('CustomSpawnRate').value);
+                    CircleSize =  parseInt(document.getElementById('CustomCircleSize').value);
+                    CircleLifeTimeMin =  parseInt(document.getElementById('CustomCircleLifeTimeMin').value);
+                    CircleLifeTimeMax =  parseInt(document.getElementById('CustomCircleLifeTimeMax').value);
+                    MaxMisses = parseInt(document.getElementById('CustomMaxMisses').value);
+                    break;
+            }
+        }
+        function GameOver() {
+            if(Score > 0.0) {
+                DestroyAllCircles = true;
+                const FinalScoreText = document.getElementById("FinalScore");
+                FinalScoreText.innerText = `Final Score: ${Score}`;
+                const GameOverScreen = document.getElementById("GameOverScreen");
+                GameOverScreen.hidden = false;
+                document.getElementById("TopBar").hidden = true;
+                document.getElementById("hiddenFormField-Score").value = Score;
+            }
+        }
+        function Start() {
+            document.getElementById("Menu").hidden = true;
+            document.getElementById("TopBar").hidden = false;
+
+            SelectDifficulty();
+
+            console.log(SpawnRate,CircleSize,CircleLifeTimeMax,CircleLifeTimeMin,MaxMisses);
+
+            const spawner = setInterval(() => {
+                const X = RandomIntInRange(BorderSpace + CircleSize, MaxX - CircleSize);
+                const Y = RandomIntInRange(BorderSpace + CircleSize, MaxY - CircleSize);
+                const lifeTime = RandomIntInRange(CircleLifeTimeMin, CircleLifeTimeMax);
+                SpawnCircle(X, Y, lifeTime);
+            }, SpawnRate);
+
+            const gameWatcher = setInterval(() => {
+                if(Misses >= MaxMisses) {
+                    clearInterval(spawner);
+                    clearInterval(gameWatcher);
+                    GameOver();
+                }
+            }, 0);
+        }
+        let nextIndex = 1;
+        function AddToLeaderboard(name,score) {
+            var table = document.getElementById("LeaderBoardTable");
+            var row = table.insertRow(nextIndex);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = name;
+            cell2.innerHTML = score;
+            nextIndex++;
+        }
+        function UpdateLeaderBoard() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "http://localhost/Hexxy/AimTrainer/GetLeaderboardData.php", true);
+            xhr.responseType = 'json';
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var data = xhr.response;
+                    data.pop();
+                    data.sort((a,b) => {
+                        return b.Score - a.Score;
+                    })
+                    .map((entry) => {
+                        AddToLeaderboard(entry.Name, entry.Score);
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+        document.getElementById("DifficultySelect").hidden = false;
+        document.getElementById("LeaderBoard").classList.remove("hidden");
+
+        
+        AddToLeaderboard("Hexxy","954693542");
+        UpdateLeaderBoard();
+
+    </script>
+</body>
+</html>

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../CommonStyles.css">
-    <link rel="stylesheet" href="./Styles.css">
+    <link rel="stylesheet" href="./style.css">
     <title>js Tutorial</title>
 
     <script src="./main.js"></script>
 </head>
 <body>
+    <script src="../../Commons/Templates/ColorSchemeSelector.js"></script>
     <header>
         <h1>Lesson 2</h1>
     </header>
@@ -20,14 +20,15 @@
         <button onclick="this.remove()">Remove Me</button>
         
         <h3>php</h3>
+        <h3>broken unless database tables are created manually</h3>
         <h4>ex1</h4>
-        <form action="http://localhost/Hexxy/e1.php" method="POST">
+        <form action="http://localhost/Hexxy/Lesson2/e1.php" method="POST">
             <input type="submit" name="submit">
             <input type="text" name="t1">
         </form>
         <div style="height:100px"></div>
-        <h4>ex1</h4>
-        <form action="http://localhost/Hexxy/e2.php" method="POST" target="iframe1">
+        <h4>ex2</h4>
+        <form action="http://localhost/Hexxy/Lesson2/e2.php" method="POST" target="iframe1">
             <input type="submit" name="submit">
             <input type="text" name="t1">
         </form>
@@ -50,7 +51,6 @@
         <span id="st">sticky</span>
         <span>after sticky</span>
 
-        <!-- for scrolling purposes -->
         <div id="EmptySpace" style="height: 1700px;"></div>
     </section>
 </body>
