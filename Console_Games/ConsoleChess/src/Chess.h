@@ -3,16 +3,19 @@
 #include "Moves.h"
 #include "Board.h"
 #include "Pieces/Pieces.h"
-#include "WindowsBS.h"
 #include "SpecialChars.h"
+
+#include <locale.h>
+
+void ClearScreen() { puts("\033[H\033[J"); }
 
 static class ChessGame
 {
 public:
 	ChessGame() {
-		GetNiceConsole();
+		setlocale(LC_ALL, "");
 
-#define Create(PIECE,POS,COLOR) Board[Coord##POS] = new PIECE(Coord##POS,COLOR)
+#define Create(PIECE,POS,COLOR) Board[Coord POS] = new PIECE(Coord POS,COLOR)
 		auto CreateSet = [](i8 XOffset, i8 YOffset, i8 Direction, Piece::Color color) {
 			for (int x = 0; x < 8; x++)
 				Create(Pawn, (XOffset + x, YOffset + Direction), color);

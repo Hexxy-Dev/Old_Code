@@ -1,4 +1,4 @@
-#include "src/Chess.h"
+#include "./Chess.h"
 
 int main()
 {

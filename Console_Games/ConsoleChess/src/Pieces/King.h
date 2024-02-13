@@ -47,6 +47,6 @@ public:
 	virtual bool IsInCheck() override {
 		return WillBeInCheck(currentPosition);
 	}
-	virtual i8 Value() override { return INFINITY; /* >:3 */ }
+	virtual i8 Value() override { return -128; }
 	bool isFirstMove = true;
 };

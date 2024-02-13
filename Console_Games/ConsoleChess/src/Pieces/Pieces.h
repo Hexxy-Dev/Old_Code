@@ -6,7 +6,7 @@
 PIECE(Coord position, Piece::Color color) {	\
 	this->currentPosition = position;		\
 	this->color = color;					\
-	this->type = Piece::##PIECE;			\
+	this->type = Piece::PIECE;				\
 }
 
 #include "King.h"

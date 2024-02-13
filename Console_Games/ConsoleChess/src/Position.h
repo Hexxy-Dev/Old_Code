@@ -23,6 +23,9 @@ struct Coord
 	bool operator==(Coord other) {
 		return (x == other.x && y == other.y);
 	}
+	bool operator!=(Coord other) {
+		return !this->operator==(other);
+	}
 	Coord operator+(Coord other) {
 		return { x + other.x, y + other.y };
 	}
