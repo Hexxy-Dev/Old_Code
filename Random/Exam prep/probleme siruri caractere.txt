@@ -1,0 +1,21 @@
+Se dă un șir de caractere ce conține numai litere mici ale alfabetului englez și spații. Să se determine câte vocale din șir sunt cuprinse între două consoane.
+
+Se dă o propoziție care conține numai litere mici ale alfabetului englez și spații. Să se afișeze cuvintele din propoziție care conțin numai vocale.
+
+Se dă un șir de caractere ce conține numai litere ale alfabetului englez și spații. Să se înlocuiască literele mari cu litere mici și vice-versa.
+
+Se dă o propoziție formată din litere mici ale alfabetului englez, spații și semnele de punctuație virgulă și punct. Determinați un cuvânt palindrom din propoziție, primul în ordine alfabetică. Se garantează că există cel puțin un cuvânt palindrom în propoziția dată.
+
+Se dă un șir de caractere ce conține numai litere mici ale alfabetului englez. Să se afișeze literele care apar de exact două ori în șirul dat.
+
+Se dă un șir de caractere format din mai multe cuvinte, separate prin spații. Cuvintele pot conține atât litere mici, cât și litere mari ale alfabetului englez. Să se afișeze acronimul acestui grup de cuvinte. De exemplu, pentru "Cash rules everything around me", se va afișa "CREAM".
+
+Să se scrie un program care citeşte un şir de caractere format din litere mici ale alfabetului englez şi elimină din șir toate vocalele.
+
+Se dau două șiruri de caractere ce conțin doar litere mici ale alfabetului englez. Să se determine de câte ori apare al doilea șir în primul, precum și pozițiile la care apare acesta.
+
+Se dă o propoziție care conține litere ale alfabetului englez, spații și semne de punctuație. Să se afișeze, pe linii separate, fiecare cuvânt și frecvența lui în șirul dat. Cuvintele se vor afișa în ordine lexicografică.
+
+Se dă o propoziție care conține litere ale alfabetului englez, spații și semne de punctuație. Să se afișeze, pe linii separate, fiecare cuvânt și frecvența lui în șirul dat. Cuvintele se vor afișa în ordine lexicografică.
+
+Se dau trei șiruri de caractere a, b și c, care conțin doar litere ale alfabetului englez. Să se înlocuiască fiecare apariție a lui b în a cu c. Se garantează că nu există niciun prefix al șirului b care să fie egal cu vreun sufix de-al său; desigur, excepție face string-ul întreg.
