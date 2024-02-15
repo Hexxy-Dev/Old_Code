@@ -1,0 +1,13 @@
+ui8 a = 5
+ui8 b = 5
+
+ui8 c = 0
+ui8 a2 = a
+#NOOM
+c++
+a = a + a2
+
+if c != b
+jump NOOM
+
+print a

@@ -1,0 +1,56 @@
+8 bit word
+
+instruction structure:
+       00              000000
+number of arguments   instruction
+
+immediate arguments
+
+the arguments are registers or memory adresses
+
+
+2 ALUs
+- unsigned 8-bit
+- signed 8-bit
+
+possible to add 16 or 32-bit values using the ram and overflow flags?
+possible to simulate float values?
+
+
+2 8-bit registers for program counter
+
+separate ram and rom structures
+
+memory adress spaces:
+0x00 -> 0x07
+0000 0000 -> 0000 0111 registers
+0x08 -> 0x0F
+0000 1000 -> 0000 1111 reserved
+0x10 -> 0xFF
+0001 0000 -> 1111 1111 RAM
+
+the ram is initialized with 0 at the start of execution
+at the start of execution the rom is read until the first 0x00 pair! and all values are stored in ram
+
+
+FLAGS:
+CARRY
+SKIP
+
+OPCODES:
+nop 00 000000       NO OPERATION
+hlt 00 111111       HALT
+mov 10 000001       MOVE VALUE FROM ADRESS A TO ADRESS B
+add 10 000010       ADD REG A TO REG B STORE RESULT IN A
+sub 10 000011       SUBTRACT REG B FROM REG A STORE RESULT IN A
+prn 01 000100       PRINT ADRESS AS INT
+prc 01 000101       PRINT ADRESS AS CHAR
+not 01 000110       LOGICAL NOT ON REG A STORE IN REG A
+lor 10 000111       LOGICAL OR ON REG A AND REG B STORE IN REG A
+and 10 001000       LOGICAL AND ON REG A AND REG B STORE IN REG A
+xor 10 001001       XOR ON REG A AND REG B STORE IN REG A
+btr 10 001010       BIT SHIFT RIGHT ON REG A BY ADRESS B STORE IN REG A
+btl 10 001011       BIT SHIFT LEFT ON REG A BY ADRESS B STORE IN REG A
+jmp 10 001100       CHANGE PROGRAM COUNTER REGISTERS
+ifi 01 001101       SET FLAG TO SKIP NEXT INSTRUCTION
+eql 10 001110       IF REG A == REG B REG A = 1
