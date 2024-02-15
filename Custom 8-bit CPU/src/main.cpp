@@ -24,4 +24,6 @@ int main()
 		Simulate();
 		break;
 	}
+	std::cin.get();
+	std::cin.get();
 }
