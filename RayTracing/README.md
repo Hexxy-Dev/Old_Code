@@ -1,1 +1,3 @@
+# NOT TESTED OR MODIFIED TO WORK ON LINUX
+
 While following the `Ray Tracing in One Weekend` Book Series over at https://raytracing.github.io/ , I decided to adapt some opengl code to be able to visualise the output progress live and also multithreading it so it ran faster. This is the last iteration of said renderer adapted for the official code over at https://github.com/RayTracing/raytracing.github.io/tree/release/v3
