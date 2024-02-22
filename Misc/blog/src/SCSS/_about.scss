@@ -1,0 +1,73 @@
+.about {
+  padding-bottom: 2rem;
+
+  h2 {
+    color: $secondary-color;
+  }
+
+  &__bio__image {
+    height: 50vh;
+    width: 100%;
+    background:
+      linear-gradient(
+        to right,
+        rgba($background-color, 0.9),
+        rgba($background-color2, 0.8)
+      ),
+      url('../img/home_back.bmp') center top;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    h2 {
+      font-size: 4rem;
+    }
+    p {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__bio {
+    width: 80%;
+    text-align: center;
+
+    .text-secondary {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .jobs {
+    width: 60vw;
+    margin: 2rem auto 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+
+    &__job {
+      background: lighten($background-color, 10%);
+      padding: 0.5rem;
+      border-bottom: 5px solid $secondary-color;
+
+      h2, h3 {
+        margin: 0.5rem, 0;
+      }
+
+      h6 {
+        margin: 0.3rem, 0;
+      }
+    }
+  }
+
+  .social__icons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    transform: 
+      rotate(90deg)
+      translate(-3rem, -5rem);
+  }
+}

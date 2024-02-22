@@ -1,0 +1,47 @@
+.project {
+  padding-top: 20vh;
+  padding-left: 10vw;
+  padding-right: 7vw;
+  padding-bottom: 10vh;
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  h2 {
+    font-size: 2.0rem;
+  }
+  h3 {
+    font-size: 1.8rem;
+  }
+  p {
+    font-size: 1.5rem;
+    //font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+    color: $secondary-color;
+  }
+
+  &__content {
+    h2 {
+      & > a:hover {
+        @include transition-ease;
+        color: $secondary-color;
+      }
+      & > a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .social__icons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    transform: 
+      rotate(90deg)
+      translate(-3rem, -5rem);
+  }
+}

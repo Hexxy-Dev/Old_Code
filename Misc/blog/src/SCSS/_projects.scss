@@ -1,0 +1,107 @@
+.projects {
+  padding-bottom: 2rem;
+
+  &__bio__image {
+    height: 30vh;
+    width: 100%;
+    background:
+      linear-gradient(
+        to right,
+        rgba($background-color2, 0.9),
+        rgba($background-color2, 0.8)
+      ),
+      url('../img/home_back.bmp') center top;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    .text-secondary {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__items {
+    width: 60vw;
+    margin: 2rem auto 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+
+  &__item {
+    position: relative;
+    border-bottom: 5px solid $secondary-color;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 1rem;
+
+    img {
+      width: 100%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: $background-color2;
+      opacity: 0;
+
+      @include transition-ease;
+    }
+
+    &:hover {
+      &::after {
+        top: 0;
+        opacity: 0.9;
+      }
+
+      .projects__btn {
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__btns {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    text-align: center;
+  }
+
+  &__btn {
+    opacity: 0;
+    color: $primary-color;
+    @include transition-ease;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  .social__icons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    transform: 
+      rotate(90deg)
+      translate(-3rem, -5rem);
+  }
+}
