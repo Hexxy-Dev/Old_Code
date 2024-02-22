@@ -1,0 +1,10 @@
+{
+  "name": "HexxyBot",
+  "status": "!!!WIP!!!",
+  "statusType": "PLAYING",
+  "token": "", // REDACTED
+  "intents": [
+    "GUILDS",
+    "GUILD_MESSAGES"
+  ]
+}

@@ -1,0 +1,1 @@
+This bot was mostlly just the bot over at https://github.com/Giuliopime/discordjs-bot-template/tree/master with the changes in this folder

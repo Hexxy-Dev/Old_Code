@@ -1,0 +1,20 @@
+{
+  "name": "hexxybot-v2",
+  "version": "1.0.0",
+  "description": "The new and improved HexxyBot",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "Hexxy",
+  "license": "ISC",
+  "dependencies": {
+    "beautify.log": "^3.0.4",
+    "discord.js": "^14.7.1",
+    "require-all": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
