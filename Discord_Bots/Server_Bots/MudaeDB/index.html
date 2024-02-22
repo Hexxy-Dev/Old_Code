@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MudaeDB</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+  <div class="UserControls">
+    <label for="User">User:</label><br>
+    <input type="text" id="User"><br>
+    <script>
+      function getUser(){
+        var User = document.getElementById("User").value;
+        if(User == ''){
+          User = 'Global';
+        }
+        return User
+      }
+    </script>
+    <button type="button" onclick="LoadHTML(getUser(),'Order')">Sort by order</button>
+    <button type="button" onclick="LoadHTML(getUser(),'Name')">Sort by name</button>
+    <button type="button" onclick="LoadHTML(getUser(),'Kakera')">Sort by kakera</button>
+    <button type="button" onclick="LoadHTML(getUser(),'ClaimRank')">Sort by claim rank</button>
+    <button type="button" onclick="LoadHTML(getUser(),'LikeRank')">Sort by like rank</button>
+    <button type="button" onclick="LoadHTML(getUser(),'Series')">Sort by series</button>
+    <button type="button" onclick="LoadHTML(getUser(),'Series')">Generate sort command</button>
+    <button type="button" onclick="LoadHTML(getUser(),'Series')">Generate divorce command</button>
+
+    <button id="PopOutServerSettingsButton">Open Server Stuff</button>
+  </div>
+
+  <div id="ServerSidePopout" class="PopOutMenu">
+    <div class="PopOutMenu-content">
+      <form method="post" action="/">
+        <input type="text" name="password">
+        <input type="text" name="action">
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+  </div>
+
+  <script>
+    var PopOutMenu = document.getElementById("ServerSidePopout");
+    var btn = document.getElementById("PopOutServerSettingsButton");
+    btn.onclick = function() {
+      PopOutMenu.style.display = "block";
+    }
+    window.onclick = function(event) {
+      if (event.target == PopOutMenu) {
+        PopOutMenu.style.display = "none";
+      }
+    } 
+  </script>
+
+  <div id="list-placeholder"></div>
+
+  <script>
+    function LoadHTML(userName,sortType){
+      $(function(){
+        $("#list-placeholder").load(`lists/${userName}/${userName}${sortType}.html`);
+      });
+    }
+  </script>
+
+  
+
+</body>
+</html>

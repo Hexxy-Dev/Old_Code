@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <style type="text/css">
+    .draggable 
+	{ 
+		background: #fff; 
+		padding-bottom: 20px; 
+		padding-top: 20px; 
+		padding-right: 0px; 
+		padding-left: 0px; 
+		cursor: move;
+		border: #000 1px solid;
+		text-align: center;
+		font-weight: bold;
+    float: left;
+	}
+    .droppable 
+	{ 
+		width: 550px;
+		background-color: #F93;
+		list-style: none;
+		margin: 0;
+		padding: 10px;
+		height: 100px
+	}
+  </style>
+  <script>
+  $(document).ready(function() {
+
+    $(".droppable").sortable({
+      connectWith: '#divMain .droppable',
+      update: function( event, ui ) {
+        Dropped();
+      }
+    });	
+	
+	$('#btn-get').click(function(){
+		alert(getItems('#divMain'));
+	});
+	
+  });   
+	
+    function Dropped(event, ui){
+      $(".draggable").each(function(){
+		//var p = $(this).position();
+        
+      });
+	  alert('Dropped');
+    }		
+	
+	// Get items
+	function getItems(exampleNr)
+	{
+		var columns = [];	  
+	    $(exampleNr + ' div.droppable').each(function(){
+			columns.push($(this).sortable('toArray').join(','));				
+		});
+		return columns.join(',');
+	}
+	
+  </script>
+</head>
+<body>
+
+
+<div id = "divMain">
+  <p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
+  <div id="divOuter1" class="droppable">
+    <div id="div1" class="draggable">
+      Div 1
+    </div>
+    <div id="div2" class="draggable">
+      Div 2
+    </div>
+    <div id="div3" class="draggable">
+      Div 3
+    </div>
+    <div id="div4" class="draggable">
+      Div 4
+    </div>
+    <div id="div5" class="draggable">
+      Div 5
+    </div>
+    <div id="div6" class="draggable">
+      Div 6
+    </div>
+    <div id="div7" class="draggable">
+      Div 7
+    </div>
+    <div id="div8" class="draggable">
+      Div 8
+    </div>
+    <div id="div9" class="draggable">
+      Div 9
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
