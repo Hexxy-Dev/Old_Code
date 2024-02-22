@@ -7,7 +7,8 @@
     "start": "node index.js",
     "DBbot": "node ./MudaeDB/DBbot.js",
     "HTMLGenerator": "node ./MudaeDB/HTMLGenerator.js",
-    "Utilitybot": "node ./HexxyBot/bot.js"
+    "Utilitybot": "node ./HexxyBot/bot.js",
+    "HTMLserver": "node ./HTMLserver.js"
   },
   "author": "Bosuhexxyt",
   "license": "ISC",

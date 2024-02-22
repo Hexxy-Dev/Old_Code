@@ -1,21 +1,40 @@
+//bot invite link  // REDACTED
+// bot made by Bosuhexxyt
 
 loginToken = ''; // REDACTED
 
 console.log('noom!');
 
 Discord = require('discord.js');
-client = new Discord.Client();
+client = new Discord.Client({ totalShards: 'auto' });
 client.login(loginToken);
+client.on('debug', console.log);
 
 const fs = require('fs');
 
-client.commands = new Discord.Collection();
 
 client.on('ready', botReady);
 
 function botReady(){
     console.log('Bot is ready');
 }
+
+presence = 0;
+
+setInterval(function(){
+    if(presence){
+        presence = 0;
+        client.user.setPresence({ activity: { name: 'weeb music', type: 'LISTENING' }, status: 'Online' })
+            //.then(console.log)
+            .catch(console.error);
+    }else{
+        presence = 1;
+        client.user.setPresence({ activity: { name: 'anime', type: 'WATCHING' }, status: 'idle' })
+            //.then(console.log)
+            .catch(console.error);
+    }
+},240000);
+
 
 client.on('messageReactionAdd', (reaction, user) => {
     Reaction(reaction);
@@ -154,7 +173,7 @@ function Start(){
     for(i=0;i<=4;i++){
         author = users[i];
 
-        if(fs.existsSync(`lists/${author}/${author}.json`)){
+        if(fs.existsSync(`./MudaeDB/lists/${author}/${author}.json`)){
             console.log(`Found ${author}`);
             existingJson = require(`./lists/${author}/${author}.json`);
         }else {console.log('JSON fetching error at initialisation'); continue;}
@@ -176,24 +195,47 @@ setInterval(async function PeriodicJSONwrite(){
     for(i=0;i<=4;i++){
         author = users[i];
 
-        if(!fs.existsSync(`lists/${author}/${author}.json`)){
+        if(!fs.existsSync(`./MudaeDB/lists/${author}/${author}.json`)){
             console.log('JSON error at write'); 
             continue;
         }
 
-        data = jsonWriteInfoArray[i].join(',\n');
+        cleanArray = jsonWriteInfoArray[i].filter(function () { return true; });
+
+        data = cleanArray.join(',\n');
 
         await writeJson(author,data);
     }
     console.log(`Updated json!!`);
+
+    setTimeout(async function (){
+        RunHTMLGenerator();
+    },10000);
+
 }, 600000);
 
 async function writeJson(author,jsonWriteInfo){
-    if(fs.existsSync(`lists/${author}/${author}.json`)){
-        fs.unlinkSync(`lists/${author}/${author}.json`);
+    if(fs.existsSync(`./MudaeDB/lists/${author}/${author}.json`)){
+        fs.unlinkSync(`./MudaeDB/lists/${author}/${author}.json`);
     }
 
-    fs.appendFile(`lists/${author}/${author}.json`,'[' + jsonWriteInfo + '\n]', function (err) {
+    fs.appendFile(`./MudaeDB/lists/${author}/${author}.json`,'[' + jsonWriteInfo + '\n]', function (err) {
         if (err) throw err;
+    });
+}
+
+
+var child_process = require('child_process');
+
+function RunHTMLGenerator(){
+    console.log('html generated!');
+    HTMLGenerator = child_process.exec('npm run HTMLGenerator',{detached: true});
+    HTMLGenerator.stdout.on('data',( data ) =>{
+        // This will render 'live':
+        process.stdout.write( 'HTMLGeneratorLog: ' + data );
+    });
+    HTMLGenerator.stderr.on('data',( data ) =>{
+        // This will render 'live' too:
+        process.stdout.write( 'HTMLGeneratorErr: ' + data );
     });
 }

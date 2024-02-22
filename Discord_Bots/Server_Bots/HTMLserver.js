@@ -8,21 +8,18 @@ var qs = require('querystring');
 const host = 'localhost';
 const port = ; // REDACTED
 
-
 const localtunnel = require('localtunnel');
 
 (async () => {
 const tunnel = await localtunnel({ port: port, subdomain: `` }); // REDACTED
 
-    // the assigned public url for your tunnel
-    // i.e. https://abcdefgjhij.localtunnel.me
-
     http.createServer(function (request, response) {
+        request.url = './MudaeDB' + request.url;
         console.log('request ', request.url);
 
-        var filePath = '.' + request.url;
-        if (filePath == './') {
-            filePath = './index.html';
+        var filePath = request.url;
+        if (filePath == './MudaeDB/') {
+            filePath = './MudaeDB/index.html';
         }
 
         var extname = String(path.extname(filePath)).toLowerCase();
@@ -70,7 +67,7 @@ const tunnel = await localtunnel({ port: port, subdomain: `` }); // REDACTED
             request.on('data', function (data) {
                 body += data;
                 // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
-                if (body.length > 1e6) { 
+                if (body.length > 1e6) {
                     // FLOOD ATTACK OR FAULTY CLIENT, NUKE REQUEST
                     request.connection.destroy();
                 }
@@ -85,9 +82,8 @@ const tunnel = await localtunnel({ port: port, subdomain: `` }); // REDACTED
                 if(post.password == ''){ // REDACTED
                     switch(post.action){
                         case 'StopServer' : StopServer(); break;
-                        case 'RunBot' : RunBot(); break;
-                        case 'StopBot' : StopBot(); break;
                         case 'HTMLGen' : RunHTMLGenerator(); break;
+                        case 'StopApp' : StopApp(); break;
                     }
                 }
             });
@@ -102,44 +98,32 @@ const tunnel = await localtunnel({ port: port, subdomain: `` }); // REDACTED
         console.log('closed tunnel!');
     });
 
+    function StopApp(){
+        console.log('STOPTHEGODDAMNAPP');
+        StopServer();
+    }
+
     async function StopServer(){
         console.log('Goodbye');
         tunnel.close();
-        if(bot != undefined){
-            child_process.spawn("taskkill", ["/pid", bot.pid, '/f', '/t']);
-            console.log('bot killed!');
-            bot = undefined;
-        }
         setTimeout(async () => { }, 3000);
+        console.log('Stopping');
         process.exit();
     }
     
 })();
 
 var child_process = require('child_process');
-bot = undefined;
-
-function RunBot(){
-    console.log('bot started!');
-    bot = child_process.exec('npm run bot',{detached: true});
-}
-async function StopBot(){
-    if(bot != undefined){
-        child_process.spawn("taskkill", ["/pid", bot.pid, '/f', '/t']);
-        console.log('bot killed!');
-        bot = undefined;
-    }
-}
 
 function RunHTMLGenerator(){
     console.log('html generated!');
-    child_process.exec('npm run HTMLGenerator',{stdio:[0,1,2]});
+    HTMLGenerator = child_process.exec('npm run HTMLGenerator',{detached: true});
+    HTMLGenerator.stdout.on('data',( data ) =>{
+        // This will render 'live':
+        process.stdout.write( 'HTMLGeneratorLog: ' + data );
+    });
+    HTMLGenerator.stderr.on('data',( data ) =>{
+        // This will render 'live' too:
+        process.stdout.write( 'HTMLGeneratorErr: ' + data );
+    });
 }
-
-
-//Start function
-RunBot();
-
-setInterval(async function PeriodicHTMLGenerator(){
-    RunHTMLGenerator();
-}, 1800000);
