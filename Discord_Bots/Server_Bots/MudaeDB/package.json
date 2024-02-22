@@ -1,0 +1,18 @@
+{
+  "name": "mudae-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js > ./Logs/serverLog.txt",
+    "bot": "node bot.js > ./Logs/botLog.txt",
+    "HTMLGenerator": "node HTMLGenerator.js > ./Logs/HTMLGeneratorLog.txt"
+  },
+  "author": "Bosuhexxyt",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "localtunnel": "^2.0.1",
+    "querystring": "^0.2.0"
+  }
+}

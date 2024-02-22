@@ -25,8 +25,6 @@ client.on('messageReactionRemove', (reaction, user) => {
     Reaction(reaction);
 });
 
-ok = 0;
-
 async function Reaction(reaction){
 	if (reaction.partial) {
 		try {
@@ -36,109 +34,39 @@ async function Reaction(reaction){
 			return;
 		}
     }
-    if(Ready){
-        if(!locked){
-            ReactionMessage = reaction.message.id;
-            locked = true;
-        }
-        if(ok == 2 && reaction.message.id == ReactionMessage){
-            characterCount = reaction.message.embeds[0].footer.text.split(' ');
-            characterCount = characterCount[6];
 
-            logMessage(reaction.message,characterCount);
-        }
-        else{
-            ok++;
+    if(reaction.message.embeds[0]){
+        if(reaction.message.embeds[0].footer){
+            if(reaction.message.embeds[0].footer.text.split(' ')[1] != 2){
+                if(reaction.message.embeds[0].footer.text.split(' ')[6] > 30){
+                    embedFooterData = reaction.message.embeds[0].footer.text.split(' ');
+                    order = embedFooterData[4];
+                    author = embedFooterData[2];
+                    author = author.split(' ');
+                    author = author[0];
+                    totalNumberOfCharacters = embedFooterData[6];
+            
+                    switch(author){
+                        case'Bosuhexxyt': accountOrder = 0; break;
+                        case'': accountOrder = 1; break; // REDACTED
+                        case'': accountOrder = 2; break; // REDACTED
+                        case'': accountOrder = 3; break; // REDACTED
+                        case'': accountOrder = 4; break; // REDACTED
+                        default : console.log('New user!!!!'); return;
+                    }
+
+                    logMessage(reaction.message,accountOrder,author,order,totalNumberOfCharacters);
+                }
+            }
         }
     }
 }
 
-client.on('message', gotMessage);
+jsonWriteInfoArray=[
+[],[],[],[],[]
+];
 
-Ready = false;
-locked = false;
-order = 1;
-
-function gotMessage(message){
-    if(!message.author.bot){
-        firstargs = message.content.split(' ');
-        command = firstargs[0] + ' ' + firstargs[1];
-        console.log(command);
-        console.log(firstargs[2]);
-        if(!Ready && command == 'DB start'){
-            separator = '';
-            order = 1;
-            author = firstargs[2];
-            dirPath = './lists/' + author;
-            fs.mkdirSync(dirPath, { recursive: true })
-            if(fs.existsSync(`lists/${author}/${author}.json`)){
-                fs.unlinkSync(`lists/${author}/${author}.json`);
-            }
-            fs.appendFile(`lists/${author}/${author}.json`,'[', function (err) {
-                if (err) throw err;
-                console.log(`Started json for ${author}`);
-            });
-            Ready = true;
-        }
-        if(!Ready && command == 'DB resume'){
-            author = firstargs[2];
-            if(fs.existsSync(`lists/${author}/${author}.json`)){
-            separator = ',';
-            order = 1;
-            dirPath = './lists/' + author;
-            fs.mkdirSync(dirPath, { recursive: true })
-
-            existingJson = require(dirPath + '/' + author + '.json');
-
-            order = Object.keys(existingJson).length;
-
-            existingJson = JSON.stringify(existingJson);
-            existingJson = existingJson.slice(0,-1);
-            existingJson = existingJson.escapeSpecialChars()
-            
-            fs.unlinkSync(`lists/${author}/${author}.json`);
-            
-            fs.appendFile(`lists/${author}/${author}.json`,existingJson, function (err) {
-                if (err) throw err;
-                console.log(`Started json for ${author}`);
-            });
-
-            Ready = true
-            }
-        }
-        if(command == 'DB continue'){
-            ok = 0;
-            Ready = true;
-            locked = false;
-        }
-        if(command == 'DB stop'){
-            Ready = false;
-            locked = false;
-            fs.appendFile(`lists/${author}/${author}.json`,'\n]', function (err) {
-                if (err) throw err;
-                console.log(`Stopped json for ${author}`);
-            });
-            separator = '';
-            ok = 0;
-        }
-    }
-}
-
-String.prototype.escapeSpecialChars = function() {
-    return this.replace(/\\n/g, "\\n")
-               .replace(/\\'/g, "\\'")
-               .replace(/\\"/g, '\\"')
-               .replace(/\\&/g, "\\&")
-               .replace(/\\r/g, "\\r")
-               .replace(/\\t/g, "\\t")
-               .replace(/\\b/g, "\\b")
-               .replace(/\\f/g, "\\f");
-};
-
-place = 0;
-
-function logMessage(message,characterCount){
-    place ++;
+function logMessage(message,accountOrder,author,order,totalNumberOfCharacters){
     details = message.embeds[0].description.split('\n');
     characterName = message.embeds[0].author.name;
     offset = 0;
@@ -191,48 +119,81 @@ function logMessage(message,characterCount){
     imageLink = message.embeds[0].image.url;
 
     if(notes == undefined){
-        notes = '404 Not found';
+        notes = '';
     }
 
-    logEverything(order,characterName,series,kakera,claimRank,likeRank,notes,imageLink);
+    jsonWriteInfo =`{"Order":${order},"Name":"${characterName}","Series":"${series}","Kakera":${kakera},"ClaimRank":${claimRank},"LikeRank":${likeRank},"Notes":"${notes}","ImageLink":"${imageLink}"}`;
 
-    jsonWriteInfo = separator + `{"Order":${order},"Name":"${characterName}","Series":"${series}","Kakera":${kakera},"ClaimRank":${claimRank},"LikeRank":${likeRank},"Notes":"${notes}","ImageLink":"${imageLink}"}`;
+    jsonWriteInfoArray[accountOrder][order-1] = jsonWriteInfo;
 
-    writeJson(author,jsonWriteInfo);
-    order++;
-    if(order <= characterCount){
-        fun();
+    for(k=0;jsonWriteInfoArray[accountOrder].length-k > totalNumberOfCharacters; k++){
+        //console.log(jsonWriteInfoArray[accountOrder].length-k);
+        jsonWriteInfoArray[accountOrder].pop();
+    }
+
+    //console.log(jsonWriteInfoArray);
+}
+
+String.prototype.escapeSpecialChars = function() {
+    return this.replace(/\\n/g, "\\n")
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f");
+};
+
+users =[ // REDACTED
+];
+
+Start();
+
+function Start(){
+    for(i=0;i<=4;i++){
+        author = users[i];
+
+        if(fs.existsSync(`lists/${author}/${author}.json`)){
+            console.log(`Found ${author}`);
+            existingJson = require(`./lists/${author}/${author}.json`);
+        }else {console.log('JSON fetching error at initialisation'); continue;}
+    
+        existingJson = JSON.stringify(existingJson);
+        existingJson = existingJson.slice(0,-1);
+        existingJson = existingJson.escapeSpecialChars();
+        existingJson = existingJson.substring(1);
+        
+        existingJson = existingJson.replace(/},/g,'}},');
+        existingJson = existingJson.split('},');
+        
+        jsonWriteInfoArray[i] = existingJson;
     }
 }
 
-separator = '';
+setInterval(async function PeriodicJSONwrite(){
 
-function writeJson(author,jsonWriteInfo){
-    fs.appendFile(`lists/${author}/${author}.json`,jsonWriteInfo, function (err) {
+    for(i=0;i<=4;i++){
+        author = users[i];
+
+        if(!fs.existsSync(`lists/${author}/${author}.json`)){
+            console.log('JSON error at write'); 
+            continue;
+        }
+
+        data = jsonWriteInfoArray[i].join(',\n');
+
+        await writeJson(author,data);
+    }
+    console.log(`Updated json!!`);
+}, 600000);
+
+async function writeJson(author,jsonWriteInfo){
+    if(fs.existsSync(`lists/${author}/${author}.json`)){
+        fs.unlinkSync(`lists/${author}/${author}.json`);
+    }
+
+    fs.appendFile(`lists/${author}/${author}.json`,'[' + jsonWriteInfo + '\n]', function (err) {
         if (err) throw err;
-        console.log(`Updated json for ${author}`);
     });
-    if(!separator){
-        separator = ',\n';
-    }
-}
-
-var exec = require('child_process').execFile;
-
-var fun =function(){
-   exec('clk.exe',function(err, data) {
-       console.log(err);
-       console.log(data);
-    });
-}
-
-function logEverything(order,characterName,series,kakera,claimRank,likeRank,notes,imageLink){
-    console.log(order);
-    console.log(characterName);
-    console.log(series);
-    console.log(kakera);
-    console.log(claimRank);
-    console.log(likeRank);
-    console.log(notes);
-    console.log(imageLink);
 }
