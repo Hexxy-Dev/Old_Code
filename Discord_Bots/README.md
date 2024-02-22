@@ -1,0 +1,1 @@
+Collection of discord bots I made during the pandemic

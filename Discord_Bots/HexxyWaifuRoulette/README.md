@@ -1,0 +1,1 @@
+This bot was started during the time that `Mudae` was down due to too much traffic
