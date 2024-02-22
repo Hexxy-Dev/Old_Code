@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MudaeDB</title>
-  <link rel="stylesheet" href="./css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  
 </head>
 
 <body>
@@ -30,8 +32,7 @@
     <button type="button" onclick="LoadHTML(getUser(),'ClaimRank')">Sort by claim rank</button>
     <button type="button" onclick="LoadHTML(getUser(),'LikeRank')">Sort by like rank</button>
     <button type="button" onclick="LoadHTML(getUser(),'Series')">Sort by series</button>
-    <button type="button" onclick="LoadHTML(getUser(),'Series')">Generate sort command</button>
-    <button type="button" onclick="LoadHTML(getUser(),'Series')">Generate divorce command</button>
+    <input type="submit" class="input-button" id="btn-get" value="Generate sort command">
 
     <button id="PopOutServerSettingsButton">Open Server Stuff</button>
   </div>
@@ -59,14 +60,56 @@
     } 
   </script>
 
-  <div id="list-placeholder"></div>
+  <script>
+
+    $(document).ready(function() {
+
+      $('.CharacterInfo').draggable();
+    
+      $(".droppable").sortable({
+        connectWith: '#list-placeholder .droppable',
+        update: function( event, ui ) {
+          Dropped();
+        }
+      });	
+    
+      $('#btn-get').click(function(){
+        alert(getItems('#list-placeholder'));
+      });
+      
+    });
+    
+    function Dropped(event, ui){
+      $(".CharacterInfo").each(function(){
+        //var p = $(this).position();
+      });
+      //alert('Dropped');
+    }		
+
+    // Get items
+    function getItems(exampleNr)
+    {
+      var columns = [];	 
+
+        $(exampleNr + ' div.droppable').each(function(){
+        columns.push($(this).sortable('toArray').join('$'));				
+      });
+      var order =  columns.join('$');
+      return '$smpos ' + order;
+    }
+  </script>
+
+  <div id="list-placeholder">
+    <div class="droppable"></div>
+  </div>
 
   <script>
     function LoadHTML(userName,sortType){
       $(function(){
-        $("#list-placeholder").load(`lists/${userName}/${userName}${sortType}.html`);
+        $(".droppable").load(`lists/${userName}/${userName}${sortType}.html`);
       });
     }
   </script>
+
 </body>
 </html>

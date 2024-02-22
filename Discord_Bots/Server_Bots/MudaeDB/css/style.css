@@ -1,4 +1,4 @@
-body{
+body {
 	background-color:#0b2d31;
 	color:#eef06c;
 
@@ -8,14 +8,21 @@ body{
 	margin:0;
 }
 
-.CharacterInfo{
+.CharacterInfo {
     display: inline-block;
     width: 248px;
     padding: 10px;
-    /*border: 0.01px solid #0c3236;*/
+
+    cursor: move;
+    text-align: center;
 }
 
-h1{
+.droppable { 
+list-style: none;
+margin: 0;
+}
+
+h1 {
     font: normal 20px Arial, Helvetica, sans-serif;
     font-weight: bold;
     padding: 0;
@@ -23,19 +30,19 @@ h1{
     color: gold;
 }
 
-h2{
+h2 {
     font: normal 16px Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
 }
 
-h3{
+h3 {
     font: normal 12px Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
 }
 
-button{
+button {
     border: none;
     color: red;
     background-color: #0b2d31;
@@ -48,7 +55,7 @@ button{
     cursor: pointer;
 }
 
-button:focus{
+button:focus {
     border: none;
     color: red;
     background-color: #134d53;
