@@ -1,0 +1,34 @@
+WIP:
+mod manager
+keybind manager
+autopatch
+REWRITE IN LUTRIS
+proxmox auto vm script???
+
+complete overhaul of the start sequence
+maybe use python?
+
+FIXME:
+mitm does not close properly
+proxy is unsable
+gimi closes too soon or doesn't at all
+proxy group and nat rules do not get removed
+
+
+
+
+###########################
+LUTRIS SOLVES MOST PROBLEMS
+###########################
+
+
+proxy can also be set in lutris:
+from lutris: wine control panel -> Internet Settings -> Connections, tick the Use a proxy server and enter 127.0.0.1 and port # maybe automated trough installer????
+
+
+these had to be DISABLED in lutris for 3dmigoto to work:
+VKD3D
+DXVK-NVAPI/DLSS
+AMD FidelityFX Super Resolution (FSR)
+BattleEye Anti-Cheat
+Easy Anti-Cheat
