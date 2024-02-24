@@ -26,11 +26,9 @@
         align-items: center;
         z-index: 9999;
       }
-
       #overlay.show {
         display: flex;
       }
-
       #overlay-content {
         background-color: #fff;
         border: 1px solid #ddd;
@@ -40,13 +38,11 @@
         overflow: auto;
         position: relative;
       }
-
       #closeWrapper {
         position: absolute;
         top: 0px;
         right: 30px;
       }
-
       #close {
         position: fixed;
         font-size: 30px;
@@ -70,16 +66,16 @@
 
       function CreateKeywordsList(){
         const images = document.getElementById('gallery').querySelectorAll('img');
-        const keywords = new Map(); // use Map instead of Set to store the frequency of each keyword
+        const keywords = new Map();
         for (const image of images) {
           const imageKeywords = image.dataset.keywords.toLowerCase().split(',');
           for (const imageKeyword of imageKeywords) {
             const trimmedKeyword = imageKeyword.trim();
-            const count = keywords.get(trimmedKeyword) || 0; // get the current count of the keyword or 0 if not present
-            keywords.set(trimmedKeyword, count + 1); // increment the count of the keyword
+            const count = keywords.get(trimmedKeyword) || 0;
+            keywords.set(trimmedKeyword, count + 1);
           }
         }
-        const sortedKeywords = Array.from(keywords.entries()).sort((a, b) => b[1] - a[1]); // sort the keywords based on their frequency
+        const sortedKeywords = Array.from(keywords.entries()).sort((a, b) => b[1] - a[1]);
         const keywordList = overlayDiv.querySelector('ul');
         keywordList.innerHTML = '';
         for (const [keyword, count] of sortedKeywords) {
@@ -100,7 +96,7 @@
     <div id="gallery"></div>
 
     <input type="file" id="folder-input" webkitdirectory>
-    <button id="loadFolder">Show</button>
+    <button id="loadFolder">Load</button>
 
     <script>
       const galleryDiv = document.getElementById('gallery');
@@ -108,15 +104,9 @@
       function extractKeywords(text) {
         const firstLine = text.split('\n')[0];
         const regex = /(?<!\\)\((?:(?<!\\)\((?:\\[\s\S]|[^()]*)*\)|\\[\s\S]|[^()])*(?<!\\)\)/g;
-        // Explanation of the regular expression:
-        // (?<!\\) - Negative lookbehind to ensure that the opening parentheses is not escaped
-        // \( - Matches an opening parenthesis
-        // (?:(?<!\\)\((?:\\[\s\S]|[^()]*)*\)|\\[\s\S]|[^()])* - Matches any character inside the parentheses, taking into account escaped parentheses
-        // (?<!\\)\) - Negative lookbehind to ensure that the closing parentheses is not escaped
-        const keywords = firstLine.replace(regex, '').match(/[^,\n]+/g); // Remove the parentheses and then match anything that's not a comma or a newline
+        const keywords = firstLine.replace(regex, '').match(/[^,\n]+/g);
         return keywords;
       }
-      // Filter images by keywords
       const filterInput = document.getElementById('filterInput');
       filterInput.addEventListener('input', () => {
         const filter = filterInput.value.toLowerCase();
@@ -144,8 +134,6 @@
       function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
-
-      // Add an image to the gallery
       async function addImage(src, keywords) {
           const image = document.createElement('img');
           image.src = src;
@@ -153,14 +141,17 @@
           image.dataset.keywords = keywords.join(',');
           image.title = keywords.join(',');
           galleryDiv.append(image);
-      }
 
-      // Read and display all the images in the folder
+          image.addEventListener('click', () => {
+            const newSrc = src.replace('.png', '.txt');
+            window.open(newSrc, '_blank');
+          });
+      }
       const folderInput = document.getElementById('folder-input');
       const loadFolderButton = document.getElementById('loadFolder');
 
       loadFolderButton.addEventListener('click', async () => {
-        var startTime = performance.now()
+        var startTime = performance.now();
         let imgcount = 0;
         const filecount = folderInput.files.length;
         const promises = Array.from(folderInput.files)
@@ -179,8 +170,7 @@
             const firstLine = text.split('\n')[0];
 
             const keywords = extractKeywords(firstLine);
-            //const pngFile = './images/txt2img-images/' + file.name.replace('.txt', '.png');
-            const pngFile = './' + file.webkitRelativePath.replace('.txt', '.png')
+            const pngFile = './' + file.webkitRelativePath.replace('.txt', '.png');
             imgcount++;
             addImage(pngFile, keywords);
             return sleep(1);
