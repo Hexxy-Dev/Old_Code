@@ -1,0 +1,209 @@
+四国めたん
+Shikoku Metan
+2
+ノーマル
+normal
+0
+あまあま
+sweet
+6
+ツンツン
+tsun tsun
+4
+セクシー
+sexy
+36
+ささやき
+breathy whisper
+37
+ヒソヒソ
+soft whisper
+
+ずんだもん
+Zundamon
+3
+ノーマル
+normal
+1
+あまあま
+sweet
+7
+ツンツン
+tsun tsun
+5
+セクシー
+sexy
+22
+ささやき
+breathy whisper
+38
+ヒソヒソ
+soft whisper
+
+春日部つむぎ
+Tsumugi Kasukabe
+8
+ノーマル
+normal
+
+雨晴はう
+Rainy Weather
+10
+ノーマル
+normal
+
+波音リツ
+Namion Ritsu
+9
+ノーマル
+normal
+
+玄野武宏
+Takehiro Kurono
+11
+ノーマル
+normal
+39
+喜び
+joy
+40
+ツンギレ
+tsungile
+41
+悲しみ
+sorrow
+
+白上虎太郎
+Torataro Shirakami
+12
+ふつう
+ordinary
+32
+わーい
+yay
+33
+びくびく
+nervous
+34
+おこ
+child
+35
+びえーん
+bien
+
+青山龍星
+Ryuusei Aoyama
+13
+ノーマル
+normal
+
+冥鳴ひまり
+Himari
+14
+ノーマル
+normal
+
+九州そら
+Kyushu Sky
+16
+ノーマル
+normal
+15
+あまあま
+sweet
+18
+ツンツン
+tsun tsun
+17
+セクシー
+sexy
+19
+ささやき
+breathy whisper
+
+もち子さん
+Mochiko
+20
+ノーマル
+normal
+
+剣崎雌雄
+Kenzaki
+21
+ノーマル
+normal
+
+WhiteCUL
+WhiteCUL
+23
+ノーマル
+normal
+24
+たのしい
+fun
+25
+かなしい
+sad
+26
+びえーん
+bien
+
+後鬼
+Goki
+27
+人間ver.
+human ver.
+28
+ぬいぐるみver.
+plush ver.
+
+No.7
+No.7
+29
+ノーマル
+normal
+30
+アナウンス
+announcement
+31
+読み聞かせ
+story telling
+
+ちび式じい
+Little old man
+42
+ノーマル
+normal
+
+櫻歌ミコ
+Sakuraka Miko
+43
+ノーマル
+normal
+44
+第二形態
+second form
+45
+ロリ
+loli
+
+小夜/SAYO
+Sayo
+46
+ノーマル
+normal
+
+ナースロボ＿タイプＴ
+Nurse Robo Type T
+47
+ノーマル
+normal
+48
+楽々
+easily
+49
+恐怖
+fear
+50
+内緒話
+secret story

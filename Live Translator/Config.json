@@ -1,0 +1,20 @@
+{
+    "openai_api_key": "",
+    "deepl_auth_key": "",
+
+    "input_language": "en",
+    "output_language": "ja",
+
+    "default_output_text": "ノムノムノム。ノム。。ノムノム。",
+
+    "virtual_microphone_device_name": "",
+    "output_device_name": "",
+    "output_audio_to_microphone": true,
+    "monitor_audio": true,
+
+    "frame_chunk_size": 1024,
+    "sample_rate": 48000,
+    "block_size": 4096,
+    "channels": 2,
+    "buffer_size": 60
+}

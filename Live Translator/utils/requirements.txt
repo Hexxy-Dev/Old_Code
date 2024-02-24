@@ -1,0 +1,7 @@
+deepl
+openai
+voicevox-client
+pynput
+sounddevice
+soundfile
+numpy
