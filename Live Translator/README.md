@@ -15,7 +15,8 @@
 
 
 ## Misc:
-![Sample](./assets/test.wav)
+
+https://github.com/Hexxy-Dev/Old_Code/assets/159670889/eb735d33-0f58-49e1-b9fc-72e8b780b19f
 
 ### Inspired by https://www.youtube.com/watch?v=UY7sRB60wZ4
 ### Made in collaboration with [Dan]()
