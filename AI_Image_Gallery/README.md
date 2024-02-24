@@ -1,0 +1,1 @@
+A very simple gallery browser to quickly find and iterate over previously generated images
