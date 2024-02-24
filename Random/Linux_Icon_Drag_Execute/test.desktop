@@ -1,0 +1,5 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Drag_Test
+Exec=FULL_PATH_TO_EXECUTABLE %f
