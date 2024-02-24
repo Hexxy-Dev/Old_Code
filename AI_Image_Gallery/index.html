@@ -41,10 +41,14 @@
         position: relative;
       }
 
-      #close {
+      #closeWrapper {
         position: absolute;
-        top: 5%;
-        right: 41.5%;
+        top: 0px;
+        right: 30px;
+      }
+
+      #close {
+        position: fixed;
         font-size: 30px;
         color: #ff0000;
         cursor: pointer;
@@ -53,7 +57,7 @@
   </head>
   <body>
     <button id="show-all-keywords">Show All Keywords</button>
-    <div id="overlay"><span id="close">&times;</span><div id="overlay-content"><ul></ul></div></div>
+    <div id="overlay"><div id="overlay-content"><div id="closeWrapper"><span id="close">&times;</span></div><ul></ul></div></div>
     <script>
       const overlayDiv = document.getElementById('overlay');
       document.getElementById('show-all-keywords').addEventListener('click', () => {
@@ -80,7 +84,13 @@
         keywordList.innerHTML = '';
         for (const [keyword, count] of sortedKeywords) {
           const listItem = document.createElement('li');
-          listItem.textContent = `${keyword} (${count})`; // display the count of the keyword
+          const button = document.createElement('button');
+          button.textContent = 'Copy';
+          button.addEventListener('click', () => {
+            navigator.clipboard.writeText(keyword);
+          });
+          listItem.appendChild(button);
+          listItem.appendChild(document.createTextNode(` ${keyword} (${count})`));
           keywordList.appendChild(listItem);
         }
       }
@@ -88,6 +98,10 @@
     
     <label>Filter by keywords: <input id="filterInput" type="text"></label>
     <div id="gallery"></div>
+
+    <input type="file" id="folder-input" webkitdirectory>
+    <button id="loadFolder">Show</button>
+
     <script>
       const galleryDiv = document.getElementById('gallery');
 
@@ -138,49 +152,49 @@
           image.classList.add('image');
           image.dataset.keywords = keywords.join(',');
           image.title = keywords.join(',');
-          galleryDiv.prepend(image);
+          galleryDiv.append(image);
       }
 
       // Read and display all the images in the folder
-      async function loadImages() {
+      const folderInput = document.getElementById('folder-input');
+      const loadFolderButton = document.getElementById('loadFolder');
+
+      loadFolderButton.addEventListener('click', async () => {
         var startTime = performance.now()
         let imgcount = 0;
-        let filecount = 0;
-        let first = true;
-        const folder = './images/txt2img-images'; // Replace with the path to your folder
-        await fetch(folder)
-          .then(response => response.text())
-          .then(async html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const links = doc.querySelectorAll('a');
-            
-            for (const link of links) {
-              const href = link.getAttribute('href');
-              if (href.endsWith('.txt')) {
-                const textFile = folder + '/' + href;
-                const pngFile = folder + '/' + href.replace('.txt', '.png');
-                await fetch(textFile)
-                  .then(response => response.text())
-                  .then(text => {
-                    const keywords = extractKeywords(text);
-                    imgcount++;
-                    addImage(pngFile, keywords);
-                  });
-              }
-              filecount++;
+        const filecount = folderInput.files.length;
+        const promises = Array.from(folderInput.files)
+        .filter((file) => file.name.match(/\.txt$/))
+        .sort((a,b) => parseInt(b.name.substring(0,5)) - parseInt(a.name.substring(0,5)))
+        .map(async file => {
+            async function readFile(file) {
+              const result = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsText(file);
+              });
+              return result;
             }
+            const text = await readFile(file);
+            const firstLine = text.split('\n')[0];
+
+            const keywords = extractKeywords(firstLine);
+            //const pngFile = './images/txt2img-images/' + file.name.replace('.txt', '.png');
+            const pngFile = './' + file.webkitRelativePath.replace('.txt', '.png')
+            imgcount++;
+            addImage(pngFile, keywords);
+            return sleep(1);
           });
-        await sleep(300);
-        var endTime = performance.now()
-        alert(`Done loading ${imgcount} images (${filecount} files) in ${endTime - startTime} ms`);
-      }
-      
-      async function MAIN() {
-        await loadImages();
+        await Promise.all(promises);
+
+        loadFolderButton.classList.add('hidden');
+        folderInput.classList.add('hidden');
+
         CreateKeywordsList();
-      }
-      MAIN();
+
+        var endTime = performance.now();
+        alert(`Finished loading ${imgcount} images (${filecount} files) in ${endTime - startTime} ms`);
+      }, {once: true});
     </script>
   </body>
 </html>
