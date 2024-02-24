@@ -1,0 +1,1 @@
+This was an attempt at creating very small C++ executables
