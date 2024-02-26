@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 
-char debugLevel;
+char debugLevel = 1;
 void Admis(const std::string& an, const std::string& tip, const double& Scor)
 {
 	if (an == "2021") {
@@ -88,6 +88,8 @@ void ArataGreseli()
 		printf("%d%s", BufferGreseli[1][2][i], (BufferGreseli[1][2][i] > 9 ? " " : "  "));
 }
 
+bool BufferGreseliUltimulTest[30];
+
 void Verifica(const std::string& an, const std::string& tip, const std::string& nume)
 {
 	printf("%s %s %s:\n",an.c_str(),tip.c_str(),nume.c_str());
@@ -128,8 +130,11 @@ void Verifica(const std::string& an, const std::string& tip, const std::string& 
 		Greseli += gresite;
 		Lipsa += lipsa;
 
-		if(debugLevel && (gresite || lipsa))
-			Greseala(an, tip, nrExercitiu);
+		if(gresite || lipsa) {
+			BufferGreseliUltimulTest[nrExercitiu] = true;
+			if(debugLevel)
+				Greseala(an, tip, nrExercitiu);
+		}
 
 		if (debugLevel == 3)
 			printf("%d:%s%.2f\n", nrExercitiu + 1, (nrExercitiu + 1 > 9 ? " " : "  "), scor);
@@ -153,23 +158,25 @@ void Verifica(const std::string& an, const std::string& tip, const std::string& 
 	puts("\n");
 }
 
-int main()
+int main(int argc, char **argv)
 {
 	std::ifstream fin("./ListaTeste.txt");
 	std::string an, tip, nume;
-	fin >> nume;
-	fin >> debugLevel;
-	debugLevel -= '0';
+	if(argc == 2)
+		debugLevel = argv[1][0] - '0';
 	while (!fin.eof()) {
+		for(char i = 0; i < 30; i++)
+			BufferGreseliUltimulTest[i] = false;
 		fin >> an >> tip >> nume;
 		Verifica(an, tip, nume);
 	}
 	fin.close();
 
-	//Verifica("2021", "iulie", "r");
-
 	if (debugLevel)
 		ArataGreseli();
+	putchar('\n');
 
-	std::cin.get();
+	for(char i = 0; i < 30; i++)
+		if(BufferGreseliUltimulTest[i])
+			printf("%d,",i+1);
 }
