@@ -1,0 +1,21 @@
+version naming:
+C.B.S.T
+
+C = any api change in the user facing implementation or cli
+// Obviously some apps will no longer work after this
+// auto incremented by compiler?????
+
+
+B = any bugfix
+// some apps might rely on unintended behaviour
+// really hard to track or make developers be able to identify
+
+S = security patches
+// again really hard to identify :/
+
+T = any other tweaks
+
+
+
+with any new package release, all apps should be recompiled if possible (open source)
+all apps that no longer work will have to recursively provide old packages until fixed

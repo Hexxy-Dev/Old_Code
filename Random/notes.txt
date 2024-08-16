@@ -1,0 +1,81 @@
+prod puterilor + 1 a nr din desc in fact prim e nr div
+alg nr div = O(sqrt(n))
+
+suma max a elem de pe pos neconsecutive
+
+problema cu crecu: cmmmc(X,max)/X = raspuns
+
+
+sum of a to b = (b-a+1)(b+a)/2
+sum of first n numbers = n(n+1)/2
+
+sum of first even = n*(n+1) where n is the number of elems
+sum of first odd = n*n where n is the number of elems
+
+nr even numbers between a and b (b-a)/2+1 when a is even and (b-a-1)/2+1 when a is odd
+nr odd numbers between a and b (b-a-1)/2+1 when a is even and (b-a)/2+1 when a is odd
+sum of odd or even from a to b = (n/2)(a+b) where a,b are the first and last elems and n is the number of elems
+
+
+int on X bits: [-2^(X-1), 2^(X-1)-1]
+any interval that fits in here can be represented on X bits!!!!!!
+
+foo(a){
+    ret foo(a/2)*foo(a/2)
+}
+este O(n) pt ca vine a/2+a/2=2a/2=a!!!!!!!!!
+
+nr cifre ATENTIE CAZ 0
+
+Cn^k = Cn-1^k + Cn-1^k-1
+
+An^k = n!/(n-k)!
+
+urm cel mai mare elem: O(n) foloseste stack
+
+scor 5-5 cate moduri?!!!!!!!!!!!!!!!!!!!!!!!!
+a[i][j]=a[i-1][j]+a[i][j-1]
+  0 1 2  3  4   5
+0 1 1 1  1  1   1
+1 1 2 3  4  5   6
+2 1 3 6  10 15  21
+3 1 4 10 20 35  56
+4 1 5 15 35 70  126
+5 1 6 21 56 126 252
+
+cel mai eficient mod de gasit radacina de ordin n al unui numar ii cautare binara ex:
+int s = 1, d = n;
+while(s<=d){
+    int m =(s+d)/2;
+    if(m*m*m==n)//radacina de ordin 3
+     return 1; // verifica daca n ii cub perfect
+    else if(m*m*m>n)
+      d=m-1;
+    else
+      d=m+1;
+}
+return 0;
+
+O(log) < O(sqrt)
+log ii mai fast decat sqrt
+
+
+??????
+O(n log n) = O(log n!)???????
+
+n(n-1)/2 muchii intr-un graf complet (pentagram)
+
+
+selection sort:
+for i = 1 n
+    for j = i+1 n
+        if(a[i]>a[j])
+            swap(a[i],a[j])
+
+bubble sort in for din interior nu il intereseaza de i din exterior
+insertion sort: for 1 n  for i 2 -1
+
+selection: find lowest and swap
+insertion: take next and insert into existing
+
+a0 + a1*x + a2*x^2 + a3*x^3 + a4*x^4 = a0 + x*(a1 + x*(a2 + x*(a3 + a4*x))) => 4 inmultiri

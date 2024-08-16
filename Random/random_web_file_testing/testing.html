@@ -1,0 +1,104 @@
+
+
+<button onclick="applyStyles(initialStyles); " >CLEAR</button>
+<button onclick="applyStyles(modifiedStyles); " >FILTER</button>
+<script>
+    // Define a function to apply styles
+    function applyStyles(styles) {
+        // Get the existing style element or create a new one if it doesn't exist
+        var style = document.getElementById('dynamic-styles');
+        if (!style) {
+            style = document.createElement('style');
+            style.type = 'text/css';
+            style.id = 'dynamic-styles';
+            document.head.appendChild(style);
+        }
+
+        // Get the style sheet
+        var sheet = style.sheet;
+
+        // Remove existing rules that match the selectors
+        for (var selector in styles) {
+            for (var i = 0; i < sheet.rules.length; i++) {
+                if (sheet.rules[i].selectorText === selector) {
+                    sheet.deleteRule(i);
+                }
+            }
+        }
+
+        // Add or update the CSS rules
+        for (var selector in styles) {
+            var rule = selector + ' {';
+            for (var property in styles[selector]) {
+                rule += property + ': ' + styles[selector][property] + ';';
+            }
+            rule += '}';
+            sheet.insertRule(rule, sheet.rules.length);
+        }
+    }
+
+    // Define your initial styles
+    var initialStyles = {
+        '.ALL': {
+            'display': 'block'
+        }
+    };
+
+    // Apply the initial styles
+    //applyStyles(initialStyles);
+
+    // Modify styles dynamically
+    var modifiedStyles = {
+        '.ALL': {
+            'display': 'none'
+        },
+        '.soft': {
+            'display': 'none'
+        }
+    };
+
+    // Apply the modified styles
+    //applyStyles(modifiedStyles);
+</script>
+
+<script>
+    var styles = {
+        '.foo': {
+            'display': 'block'
+        },
+        '.bar': {
+            'display': 'none'
+        }
+    };
+
+    // Function to apply styles
+    function applyStyles(styles) {
+        // Create a new style element
+        var style = document.createElement('style');
+        style.type = 'text/css';
+
+        var css = '';
+
+        // Generate CSS rules from the styles object
+        for (var selector in styles) {
+            css += selector + ' {';
+            for (var property in styles[selector]) {
+                css += property + ': ' + styles[selector][property] + ';';
+            }
+            css += '}';
+        }
+
+        // For compatibility with older IE versions
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+
+        // Add the style element to the document head
+        document.head.appendChild(style);
+    }
+
+    // Apply the styles
+    applyStyles(styles);
+</script>

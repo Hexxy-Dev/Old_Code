@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Filter</title>
+</head>
+<body>
+  <h2>File Filter</h2>
+  <label for="folderInput">Select a folder:</label>
+  <input type="file" id="folderInput" webkitdirectory directory>
+
+  <button onclick="filterAndSave()">Filter and Save PNGs</button>
+  <button onclick="showSessionStorage()">Show session storage</button>
+
+  <script>
+    async function filterAndSave() {
+        const folder_input = document.getElementById("folderInput");
+        const files = folder_input.files;
+
+        if (files.length === 0) {
+            alert('Please select a folder.');
+            return;
+        }
+
+        console.log(files);
+
+        let png_files = [];
+        let files_processed = 0;
+
+        for (let i = 0; i < files.length; i++) {
+
+            let file = files[i];
+
+            if (file.type === 'image/png') {
+                const reader = new FileReader();
+
+                reader.onloadend = () => {
+                    png_files.push({
+                        name: file.name,
+                        buffer: reader.result,
+                        size: file.size,
+                    });
+                    files_processed++;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                files_processed++;
+            }
+        }
+
+        while(files_processed != files.length) await new Promise(r => setTimeout(r, 100)); // not the best solution but it works :/
+
+        console.log(JSON.stringify(png_files)); // WAY TOO BIG  MUST BE < 10mb :/
+
+        // MUST SEND & STREAM ALL DATA FROM SERVER !!!!!
+
+        if (png_files.length === 0) {
+            alert('No PNG files found in the selected folder.');
+            return;
+        }
+        //sessionStorage.setItem('pngFiles', JSON.stringify(png_files));
+
+        let data = {
+            collection_type: "public",
+            collection: {
+                name: "test collection",
+                files: png_files
+            }
+        };
+
+        //console.log(JSON.stringify(data));
+            
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/data/user/upload');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(data));
+
+        //xhr.onreadystatechange = () => {
+        //    if(xhr.readyState == XMLHttpRequest.DONE) {
+        //        if(xhr.status === 200) {
+        //            let { session_id } = JSON.parse(xhr.response);
+        //            console.log(session_id);
+        //        }
+        //    }
+        //};
+
+        console.log('Filtered PNG files:', png_files);
+    }
+
+    function showSessionStorage() {
+        let sessionStorageContent = sessionStorage.getItem('pngFiles');
+        
+        if (sessionStorageContent) {
+            let png_files = JSON.parse(sessionStorageContent);
+            console.log('Contents of Session Storage:', png_files);
+            console.log(png_files[0].buffer);
+        } else {
+            console.log('No data found in Session Storage.');
+        }
+    }
+  </script>
+
+  <a href="/">BACK</a>
+</body>
+</html>

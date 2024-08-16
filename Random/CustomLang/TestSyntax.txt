@@ -1,0 +1,29 @@
+THIS IS VERY MUCH STILL WIP
+template<typename T, i8 SIZE[1..4]>
+struct coord,color {
+	T values[SIZE];
+	Expansions {
+	/*
+		x,r,s = { this.values[0] };
+		xx,rr,ss = { this.values[0], this.values[0] };
+		xxx,rrr,sss = { this.values[0], this.values[0], this.values[0] };
+		xxxx,rrrr,ssss = { this.values[0], this.values[0], this.values[0], this.values[0] };
+		
+	*/
+		#Macrofunc { // no name means it is executed in place    OR JS syntax (()=>{})()
+			const char swizzle = {
+				{'x','r','s'},
+				{'y','g','t'},
+				{'z','b','p'},
+				{'w','a','q'}
+			};
+			for(i8 i in [0..<SIZE])//WIP
+				for(i8 k in [1..4])
+					emit `${swizzle[i][0]},${swizzle[i][1]},${swizzle[i][2]} = { ${this.values[i]} };`;	
+		}
+		#Macrofuncend
+	}
+}
+
+coord<i32,4> hmm;
+someFunc(...hmm.rrr) => someFunc(...{ hmm.values[0], hmm.values[0], hmm.values[0] }) => someFunc(hmm.values[0], hmm.values[0], hmm.values[0])

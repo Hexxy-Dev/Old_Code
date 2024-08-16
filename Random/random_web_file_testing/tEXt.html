@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract tEXt Field from PNG</title>
+    <script src="./gallery.js"></script>
+</head>
+<body>
+  <input type="file" id="fileInput" accept="image/png">
+  <div id="result"></div>
+
+  <script>
+    async function simulateFileUpload(url) {
+        try {
+            const filename = url.substring(url.lastIndexOf('/') + 1);
+
+            const response = await fetch(url);
+            const fileData = await response.blob();
+
+            const file = new File([fileData], filename, { type: "image/png" });
+
+            const fileInput = document.getElementById('fileInput');
+
+            const changeEvent = new Event('change');
+            Object.defineProperty(changeEvent, 'target', {
+                writable: false,
+                value: { files: [file] },
+            });
+
+            fileInput.dispatchEvent(changeEvent);
+        } catch (error) {
+            console.error('Error fetching file:', error);
+        }
+    }
+
+    simulateFileUpload('/tests/00000-3461938576.png');
+  </script>
+
+<!--
+    <script>
+        function login() {
+            window.open('/login.html');
+        }
+    </script>
+    <input type="button" name="login" id="login" onclick="login()">
+-->
+</body>
+</html>
