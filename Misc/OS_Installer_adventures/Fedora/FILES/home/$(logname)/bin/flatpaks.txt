@@ -1,0 +1,7 @@
+io.github.congard.qnvsm
+com.github.themix_project.Oomox
+org.ghidra_sre.Ghidra
+com.github.finefindus.eyedropper
+sh.ppy.osu
+com.obsproject.Studio
+net.davidotek.pupgui2

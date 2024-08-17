@@ -1,0 +1,12 @@
+configuration {
+    display-drun: "Apps";
+    drun-display-format: "{icon} {name}";
+    display-window: "ALL";
+    display-windowcd: "";
+    font: "CascadiaCode-Regular 14";
+    modi: "drun,window,windowcd";
+    show-icons: true;
+    icon-theme: "oomox-cobalt2";
+}
+
+@theme "~/.config/rofi/theme.rasi"

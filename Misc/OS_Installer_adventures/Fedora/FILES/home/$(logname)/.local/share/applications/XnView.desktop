@@ -1,0 +1,11 @@
+[Desktop Entry]
+Terminal=false
+TryExec=/opt/XnView/xnview.sh
+Exec=/opt/XnView/xnview.sh %F
+Icon=/opt/XnView/xnview.png
+Type=Application
+Categories=Graphics;
+StartupNotify=true
+Name=XnView
+GenericName=XnViewMP
+MimeType=image/bmp;image/jpeg;image/png;image/tiff;image/gif;

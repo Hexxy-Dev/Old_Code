@@ -1,0 +1,23 @@
+[org/gnome/desktop/interface]
+clock-show-date=false
+color-scheme='prefer-dark'
+document-font-name='Cascadia Code 12'
+font-antialiasing='grayscale'
+font-hinting='slight'
+font-name='Cascadia Code 12'
+gtk-enable-primary-paste=false
+gtk-theme='oomox-Cyberpunk-Neon'
+icon-theme='breeze-dark'
+monospace-font-name='Cascadia Code 11'
+
+[org/gnome/desktop/wm/preferences]
+titlebar-font='Cascadia Code 12'
+
+action-double-click-titlebar='none'
+
+action-right-click-titlebar='none'
+
+[org/gnome/login-screen]
+enable-fingerprint-authentication=false
+enable-password-authentication=true
+enable-smartcard-authentication=false
