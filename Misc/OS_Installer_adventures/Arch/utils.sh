@@ -6,12 +6,6 @@ TEMP_DIR="$BASE_DIR/TEMP"
 CONFIG_FILE="$BASE_DIR/TEMP/setup.conf"
 set +a
 
-##################################
-#                                #
-#         G R A P H I C S        #
-#                                #
-##################################
-
 # pad a string($1) left and right to make it centered in $2 characters of space
 utils_CenterString() {
   local string="$1"
@@ -49,69 +43,16 @@ utils_ShowLogo() {
 $headings"
 }
 
-#show only the last $1 lines of the stdin
-utils_StdinNtail() {
-    local NUM_LINES=${1:-30}
-    local  SCREEN_BUFFER_SIZE=$NUM_LINES
-    NUM_LINES=$((NUM_LINES + 1))
-
-    local TAIL_BUFFER="$(printf "%${SCREEN_BUFFER_SIZE}s")"
-    TAIL_BUFFER="${TAIL_BUFFER// /$'\n'}"
-    echo -n "$TAIL_BUFFER"
-
-    local LAST_UPDATE=$(utils_CurrentTimeMS)
-    while IFS= read -r NEW_LINE; do
-        TAIL_BUFFER="$TAIL_BUFFER$NEW_LINE"$'\n'
-
-        if [ $(($(utils_CurrentTimeMS) - LAST_UPDATE)) -gt 100 ]; then
-            TAIL_BUFFER=$(echo "$TAIL_BUFFER" | tail -n "$NUM_LINES")$'\n'
-
-            printf "\033[${SCREEN_BUFFER_SIZE}A\033[2K%s" "$TAIL_BUFFER"
-
-            LAST_UPDATE=$(utils_CurrentTimeMS)
-        fi
-
-    done < /dev/stdin
-}
-
-##################################
-#                                #
-#            M I S C             #
-#                                #
-##################################
-
-utils_CurrentTimeMS() {
-    date +%s%3N
-}
-
 utils_pacmanInstall() {
-    pacman -S --noconfirm --needed "$@"
-}
-
-utils_rebootWithTimer() {
-    echo "Drive is not mounted can not continue"
-    echo "Rebooting in 3 Seconds ..." && sleep 1
-    echo "Rebooting in 2 Seconds ..." && sleep 1
-    echo "Rebooting in 1 Second ..." && sleep 1
-    reboot now
-}
-
-utils_setPacmanParallel() {
-    sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 20/' /etc/pacman.conf
-}
-
-##################################
-#                                #
-#  O P T I O N  M A N A G E R S  #
-#                                #
-##################################
-
-# add to setup.conf variable($1) = value($2)
-utils_setOption() {
-    if grep -Eq "^${1}.*" $CONFIG_FILE; then # check if option exists
-        sed -i -e "/^${1}.*/d" $CONFIG_FILE # delete option if exists
+    if [[ "$(id -u)" != "0" ]]; then
+        sudo pacman -S --noconfirm "$@"
+    else
+        pacman -S --noconfirm "$@" #--needed
     fi
-    echo "${1}='${2}'" >>$CONFIG_FILE # add option
+}
+
+utils_getPartitionNumberFromLabel() {
+    blkid -l -o device -t LABEL="$1" | sed 's/[^0-9]*//g'
 }
 
 # Renders a text based list of options that can be selected by the
@@ -183,7 +124,7 @@ utils_selectColumnOption() {
     # Determine start row based on current cursor position
     local lastrow
     IFS=';' read -r -dR lastrow _ < <(get_cursor_pos)
-    startrow=$((lastrow - size))
+    startrow=$((lastrow - size - 4)) #idk why -4
     local active_row=0
     local active_col=0
     local active_index=0
@@ -231,58 +172,4 @@ utils_selectColumnOption() {
     cursor_blink_on
 
     return $active_index
-}
-
-##################################
-#                                #
-#   P R E C O N D I T I O N S    #
-#                                #
-##################################
-
-
-utils_verifyIsRoot() {
-    if [[ "$(id -u)" != "0" ]]; then
-        echo "ERROR! This script must be run as the root user!"
-        exit 0
-    fi
-}
-
-utils_verifyIsDocker() {
-    if awk -F/ '$2 == "docker"' /proc/self/cgroup | read -r; then
-        echo -ne "ERROR! Docker container is not supported (at the moment)\n"
-        exit 0
-    elif [[ -f /.dockerenv ]]; then
-        echo -ne "ERROR! Docker container is not supported (at the moment)\n"
-        exit 0
-    fi
-}
-
-utils_verifyIsArch() {
-    if [[ ! -e /etc/arch-release ]]; then
-        echo -ne "ERROR! This script must be run in Arch Linux!\n"
-        exit 0
-    fi
-}
-
-utils_verifyPacmanLock() {
-    if [[ -f /var/lib/pacman/db.lck ]]; then
-        echo "ERROR! Pacman is blocked."
-        echo -ne "If not running remove /var/lib/pacman/db.lck.\n"
-        exit 0
-    fi
-}
-
-utils_verifyIsUEFI() {
-    if [[ ! -d "/sys/firmware/efi" ]]; then
-        echo "ERROR! This script must be run on a UEFI system"
-        exit 0
-    fi
-}
-
-utils_verifyScriptPreconditions() {
-    utils_verifyIsRoot
-    utils_verifyIsArch
-    utils_verifyPacmanLock
-    utils_verifyIsDocker
-    utils_verifyIsUEFI
 }

@@ -121,7 +121,7 @@ optionals_Coding() {
     sudo dnf install -y nodejs
 
     #not sure these are actually needed
-    sudo dnf install -y python python-devel python3-devel python2-devel
+    sudo dnf install -y python python-devel python3-devel python2-devel ####
     sudo dnf install -y portaudio portaudio-devel
 
     flatpak install -y com.google.AndroidStudio
@@ -142,7 +142,7 @@ optionals_Games() {
 }
 
 optionals_Random() {
-    sudo flatpak install -y com.obsproject.Studio
+    sudo flatpak install -y com.obsproject.Studio ####################################
     sudo flatpak install -y net.davidotek.pupgui2
 
     sudo flatpak install -y com.ultimaker.cura #UNOFFICIAL

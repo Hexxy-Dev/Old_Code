@@ -1,6 +1,7 @@
 #!/bin/bash
 cd "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source './utils.sh'
+source './specificUtils.sh'
 
 userPreferences_getPassword() {
     local PASSWORD1
