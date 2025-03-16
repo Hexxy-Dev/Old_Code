@@ -1,5 +1,39 @@
-These are my attempts at writing custom automated installers for different distros
+# Automated Linux Distribution Installer
 
-I wrote these because I wanted to reinstall/change my current OS with minimal downtime and a complete install of everything I need without manual intervention
+## Project Overview
+A sophisticated automation framework for installing and configuring Linux distributions (Arch Linux and Fedora) with zero manual intervention. This project streamlines the OS installation process by automating the setup of desktop environments, development tools, and user preferences.
 
-the fedora installer was first and the arch one was started after the fedora one was abandoned
+## Key Features
+- **Zero-Touch Installation**: Complete system setup without manual intervention
+- **Modular Architecture**: Well-organized shell scripts with separated concerns
+- **Multiple Distributions**: 
+  - Arch Linux
+  - Fedora
+- **Comprehensive Configuration**:
+  - Desktop Environment Setup
+  - Development Tools Installation
+  - User Preferences Configuration
+  - System Utilities Setup
+
+## Development Status
+- **Arch Installer**: archived
+- **Fedora Installer**: archived
+
+## Technical Implementation
+### Arch Linux Installer
+- **Installation Flow Management**: `main.sh` orchestrates the entire installation process
+- **System Configuration**: Handles partitioning, base system installation, and bootloader setup
+- **User Environment**: Configures desktop environment, window manager, and user applications
+- **Utility Functions**: Robust error handling and system verification
+
+## Technical Details
+- **Shell Scripting**: Pure bash implementation for maximum compatibility
+- **Error Handling**: Comprehensive error checking and logging
+- **Configuration Management**: User preferences stored in configuration files
+- **Modular Design**: Separated concerns for maintainability
+- **Testing**: Includes VM-based testing capabilities
+
+## Technical Requirements
+- UEFI-capable system
+- Internet connection during installation
+- USB drive for installer media

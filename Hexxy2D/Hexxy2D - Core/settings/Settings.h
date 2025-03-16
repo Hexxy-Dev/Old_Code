@@ -4,7 +4,7 @@
 
 ////////////     Settings    ////////////
 
-constexpr const char* Settngs_Window_Name = "Le Window";
+constexpr const char* Settings_Window_Name = "Le Window";
 
 constexpr const char* Settings_Audio_Path = "res/audio/";
 
@@ -68,7 +68,7 @@ constexpr uint16_t Settings_Fixed_Update_Rate = 20;
 
 // Settings_Do_Quad_Scaling_On_X = false; and Settings_Do_Quad_Scaling_On_Y = false; can be used for top down games
 
-// CORE_FULLSCREEN is here mostlly for debugging purposes because mouse input and graphics kinda get fucked in windowed mode
+// CORE_FULLSCREEN is here mostlly for debugging purposes because mouse input and graphics get wonky in windowed mode
 // The games created with this lib should be played in fullscreen
 
 // SHOW_APP_CONSOLE this applies for the .exe file and if set to 0 will not start a console at all so it is more like
@@ -79,7 +79,7 @@ constexpr uint16_t Settings_Fixed_Update_Rate = 20;
 
 // VSync caps the framerate at your monitor's framerate to prevent screen tearing
 // If VSync is disabled the game will try to run at fastest fps it can
-// For some reason VSync seems to really fuck performance in debug mode (mabye in release as well)
+// For some reason VSync seems to really tank performance in debug mode (mabye in release as well)
 
 // Settings_Fixed_Update_Rate (in milliseconds) sets the frequency of fixed updates
 
@@ -115,16 +115,3 @@ constexpr uint16_t Settings_Fixed_Update_Rate = 20;
 	<array>
 	<atomic>
 */
-// I SUGGEST YOU  STILL #include EVERYTHING YOU USE IN YOUR FILE EVEN IF IT IS IN THIS LIST ALREADY
-
-// NOTES:
-// IF YOU FIND A BUG IN MY CODE PLEASE REPORT IT WITHOUT HESITATION :)
-// IF YOU FIND ANY TYPOS IN MY CODE PLEASE REPORT IT WITHOUT HESITATION :)
-// IF YOU WOULD LIKE MORE FEATURES FEEL FREE TO ASK AND I'LL CONSIDER EM
-
-// THINGS LEFT TO DO ???:
-//
-
-// ACHIEVEMENT:
-// ALMOAST COMPLETELY MEMORY-LEAK FREE ON FIRST TRY :3
-// NOW, AS FAR AS I CAN SEE, THERE ARE NO MEMORY-LEAKS AT ALL :D

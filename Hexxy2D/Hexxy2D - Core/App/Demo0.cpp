@@ -88,8 +88,8 @@ int main()
 {
 	Hexxy::Display display(GridHeight, GridWidht, NumberOfColors);
 	// WARNING: MULTIPLE DISPLAYS ARE NOT SUPPORTED!!!
-	::display = &display; // ah yes, pointer fuckery
-	// this fuckery is because the display object needs to be declared in main() :(
+	::display = &display;
+	// this is required because the display object needs to be declared in main() :(
 
 	Hexxy::Set_Fixed_Update_Function(On_FixedUpdate);
 

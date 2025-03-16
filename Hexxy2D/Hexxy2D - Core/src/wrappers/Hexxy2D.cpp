@@ -133,7 +133,7 @@ namespace Hexxy
 #endif
 		Audio::init();
 
-		int init = Core::GL::windowInit(Settings_Display_Height, Settings_Display_Width, Settngs_Window_Name);
+		int init = Core::GL::windowInit(Settings_Display_Height, Settings_Display_Width, Settings_Window_Name);
 		if (init == -1)
 		{
 			throw("FATAL ERROR!!!");
